@@ -25,7 +25,7 @@ void DecodingBoard::Draw()
 
     maker_areas_->DrawSmallHolesMatrix();
 
-    //maker_areas_->DrawEncodedColorRow();
+    maker_areas_->DrawEncodedColorRow();
 
     DrawColorCombo();
 }
