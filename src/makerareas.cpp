@@ -40,15 +40,15 @@ void MakerAreas::InitEncodedColorRow()
 
     default_random_engine rand_en(rand_dev());
 
-    uniform_int_distribution<int> uniform_dist(0, 5);
+    uniform_int_distribution<int> uniform_dist(0, 6);
 
     vector<QColor> color{ comdef::color::kGreen,
                           comdef::color::kBlue,
                           comdef::color::kYellow,
                           comdef::color::kLightGreen,
                           comdef::color::kBrown,
-                          comdef::color::kRed
-                        };
+                          comdef::color::kRed,
+                          comdef::color::kLight};
 
     uint8_t num_of_holes = small_holes_matrix_->GetHolesPerRow();
 

@@ -11,8 +11,6 @@ namespace comdef
     {
         constexpr uint16_t kDefWindowWidth  = 180;
         constexpr uint16_t kDefWindowHeight = 550;
-
-        const   QString     kTitle   =   "MasterMind";
     }
 
     namespace makerarea
@@ -95,12 +93,20 @@ namespace comdef
         const QString kBgColorStyleText  =   "background-color: %1";
     }
 
-    namespace errorMsg
-    {
-        const QString kErr001      =   "This hole does not accept Black and White color!";
-    }
-
     constexpr char kEmptyString[]    = "";
+
+    namespace info
+    {
+        namespace about
+        {
+            const QString kAppName      =   "Name: MasterMind\n\n";
+            const QString kAppVersion   =   "Version: 0.0.0.1\n\n";
+            const QString kAppAuthor    =   "Author: Janie Le\n\n";
+            const QString kAppCopyright =   "Copyright@2017\n";
+        }
+
+        const QString kAppName      =   "Name: MasterMind\n\n";
+    }
 }
 
 #endif // COMDEF_H

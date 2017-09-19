@@ -3,6 +3,7 @@
 
 // Janie - ADD - START
 #include <QDesktopWidget>
+#include <QMessageBox>
 
 #include "comdef.h"
 
@@ -13,9 +14,6 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
-// Janie - ADD - START
-    ,master_mind_game_(new MasterMindGame)
-// Janie - ADD - END
 {
     ui->setupUi(this);
 
@@ -23,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     SetWindowSize();
     SetWindowPos();
 
-    master_mind_game_->GetDecodingBoard()->Draw();
+    StartNewGame();
     // Janie - ADD - END
 }
 
@@ -34,30 +32,48 @@ MainWindow::~MainWindow()
 
 // Janie - ADD - START
 
-void MainWindow::on_actionNewGame_triggered() {}
+shared_ptr<MasterMindGame> MainWindow::GetMasterMindGame(){ return master_mind_game_; }
 
-void MainWindow::on_actionExit_triggered() { QApplication::quit(); }
+void MainWindow::on_actionNewGame_triggered(){ StartNewGame(); }
 
-shared_ptr<MasterMindGame> MainWindow::GetMasterMindGame() { return master_mind_game_; }
+void MainWindow::on_actionExit_triggered(){ QApplication::quit(); }
+
+void MainWindow::on_actionAbout_triggered()
+{
+    QString msg;
+
+    msg.append(comdef::info::about::kAppName);
+    msg.append(comdef::info::about::kAppVersion);
+    msg.append(comdef::info::about::kAppAuthor);
+    msg.append(comdef::info::about::kAppCopyright);
+
+    QMessageBox::information(nullptr,
+                             comdef::info::kAppName,
+                             msg,
+                             QMessageBox::Ok,
+                             QMessageBox::Icon::Information);
+}
+
+void MainWindow::StartNewGame()
+{
+    master_mind_game_.reset(new MasterMindGame);
+
+    master_mind_game_->GetDecodingBoard()->Draw();
+}
 
 void MainWindow::SetWindowSize()
 {
-    int width = comdef::mainwindow::kDefWindowWidth;
-    int height = comdef::mainwindow::kDefWindowHeight;
-
-    setFixedSize(width, height);
+    setFixedSize(comdef::mainwindow::kDefWindowWidth,
+                 comdef::mainwindow::kDefWindowHeight);
 }
 
 void MainWindow::SetWindowPos()
 {
-    QDesktopWidget *desktop_widget = QApplication::desktop();
-    QSize window_size = size();
+    QSize desktop_size = QApplication::desktop()->size();
+    QSize main_window_size = size();
 
-    int width = desktop_widget->width();
-    int height = desktop_widget->height();
-
-    int x = (width - window_size.width()) / 2;
-    int y = (height - window_size.height()) / 2;
+    int x = (desktop_size.width() - main_window_size.width()) / 2;
+    int y = (desktop_size.height() - main_window_size.height()) / 2;
 
     move(x, y);
 }

@@ -11,4 +11,7 @@
     <qresource prefix="/exitBtn">
         <file>img/exit_game_1.png</file>
     </qresource>
+    <qresource prefix="/infoBtn">
+        <file>img/info_game_1.png</file>
+    </qresource>
 </RCC>

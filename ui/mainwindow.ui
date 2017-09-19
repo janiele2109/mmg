@@ -73,6 +73,10 @@
    </property>
   </action>
   <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="../res/resources.qrc">
+     <normaloff>:/infoBtn/img/info_game_1.png</normaloff>:/infoBtn/img/info_game_1.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;About</string>
    </property>

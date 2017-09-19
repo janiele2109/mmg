@@ -25,7 +25,7 @@ void DecodingBoard::Draw()
 
     maker_areas_->DrawSmallHolesMatrix();
 
-    maker_areas_->DrawEncodedColorRow();
+    //maker_areas_->DrawEncodedColorRow();
 
     DrawColorCombo();
 }
@@ -50,9 +50,7 @@ void DecodingBoard::DrawColorCombo()
                                    {comdef::color::kYellowStr,      comdef::color::kYellow},
                                    {comdef::color::kLightStr,        comdef::color::kLight},
                                    {comdef::color::kLightGreenStr,   comdef::color::kLightGreen},
-                                   {comdef::color::kBrownStr,       comdef::color::kBrown},
-                                   {comdef::color::kWhiteStr,       comdef::color::kWhite},
-                                   {comdef::color::kBlackStr,       comdef::color::kBlack}};
+                                   {comdef::color::kBrownStr,       comdef::color::kBrown}};
 
     unique_ptr<QComboBox> combobox = CustomControls::CreateComboBox(comdef::decodingboard::combobox::kInitRect,
                                                                     item_list,

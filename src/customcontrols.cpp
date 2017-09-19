@@ -79,8 +79,6 @@ void CustomControls::SetQPushButtonColor()
         QString style = QString(comdef::color::kBgColorStyleText).arg(combobox->currentData().toString());
         push_button->setStyleSheet(style);
     }
-    else
-        QMessageBox::information(nullptr, comdef::mainwindow::kTitle, comdef::errorMsg::kErr001);
 
     MainWindow* main_window = nullptr;
 

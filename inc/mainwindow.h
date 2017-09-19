@@ -28,6 +28,8 @@ public:
 
     void SetWindowSize();
     void SetWindowPos();
+
+    void StartNewGame();
     // Janie - ADD - END
 
 private slots:
@@ -36,6 +38,8 @@ private slots:
     void on_actionNewGame_triggered();
 
     void on_actionExit_triggered();
+
+    void on_actionAbout_triggered();
     // Janie - ADD - END
 
 private:
