@@ -20,8 +20,9 @@ class HoleMatrix: public CustomControls
 
         ~HoleMatrix();
 
-        uint8_t getNumOfRows();
+        uint8_t GetNumOfRows();
         uint8_t GetHolesPerRow();
+        uint8_t GetFirstDisableRow();
 
         vector< vector<shared_ptr<QPushButton>> >& GetHoles();
 
@@ -32,11 +33,17 @@ class HoleMatrix: public CustomControls
                              void (QAbstractButton::*event)(bool)   = nullptr,
                              CustomControls* receiver               = nullptr,
                              void (CustomControls::*handler)()      = nullptr);
+
+        void DisableAllPushButtons();
+        void EnableNewRow();
+        bool IsFulfilledRow();
+
     protected:
 
     private:
         uint8_t num_of_rows_;
         uint8_t holes_per_row_;
+        uint8_t first_disable_row_;
 
         vector< vector<shared_ptr<QPushButton>> > holes_;
 };

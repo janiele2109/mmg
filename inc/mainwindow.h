@@ -24,10 +24,10 @@ public:
     ~MainWindow();
 
     // Janie - ADD - START
-    shared_ptr<MasterMindGame> getMasterMindGame();
+    shared_ptr<MasterMindGame> GetMasterMindGame();
 
-    void setWindowSize();
-    void setWindowPos();
+    void SetWindowSize();
+    void SetWindowPos();
     // Janie - ADD - END
 
 private slots:
@@ -42,7 +42,7 @@ private:
     Ui::MainWindow *ui;
 
     // Janie - ADD - START
-    shared_ptr<MasterMindGame> masterMindGame;
+    shared_ptr<MasterMindGame> master_mind_game_;
     // Janie - ADD - END
 };
 

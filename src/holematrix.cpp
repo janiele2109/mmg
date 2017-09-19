@@ -2,14 +2,17 @@
 
 HoleMatrix::HoleMatrix(uint8_t num_of_rows,
                        uint8_t num_of_large_holes_per_row): num_of_rows_(num_of_rows),
-                                                            holes_per_row_(num_of_large_holes_per_row)
+                                                            holes_per_row_(num_of_large_holes_per_row),
+                                                            first_disable_row_(0)
 {}
 
 HoleMatrix::~HoleMatrix(){}
 
-uint8_t HoleMatrix::getNumOfRows(){ return num_of_rows_; }
+uint8_t HoleMatrix::GetNumOfRows(){ return num_of_rows_; }
 
 uint8_t HoleMatrix::GetHolesPerRow(){ return holes_per_row_; }
+
+uint8_t HoleMatrix::GetFirstDisableRow(){ return first_disable_row_; }
 
 vector< vector<shared_ptr<QPushButton>> >& HoleMatrix::GetHoles()
 {
@@ -57,6 +60,35 @@ void HoleMatrix::InitHolesMatrix(QRect      init_rect,
 
         init_rect.moveTo(org_x, init_rect.y() + row_spacing);
 
-        GetHoles().push_back(row);
+        holes_.push_back(row);
     }
+}
+
+void HoleMatrix::DisableAllPushButtons()
+{
+    for(auto row: holes_)
+        for(auto push_button: row)
+            push_button->setEnabled(false);
+}
+
+void HoleMatrix::EnableNewRow()
+{
+    for(auto push_button: holes_.at(first_disable_row_))
+    {
+        push_button->setEnabled(true);
+
+        QString style = QString("%1%2").arg(comdef::color::kBgColorStyleText).arg("#").arg(comdef::color::kGrey.rgba(), 8, 16);
+        push_button->setStyleSheet(style);
+    }
+
+    first_disable_row_++;
+}
+
+bool HoleMatrix::IsFulfilledRow()
+{
+    for(auto push_button: holes_.at(first_disable_row_ - 1))
+        if(push_button->palette().color(QPalette::Background).rgb() == comdef::color::kGrey.rgb())
+            return false;
+
+    return true;
 }

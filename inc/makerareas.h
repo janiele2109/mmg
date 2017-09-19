@@ -4,6 +4,8 @@
 #include <cstdint>
 #include <memory>
 
+#include <QColor>
+
 #include "comdef.h"
 
 
@@ -21,16 +23,24 @@ class MakerAreas
 
         ~MakerAreas();
 
-        shared_ptr<HoleMatrix> GetLargeHolesRow();
+        vector<QColor> GetEncodedColorList();
+        shared_ptr<HoleMatrix> GetEncodedColorHolesMatrix();
         shared_ptr<HoleMatrix> GetSmallHolesMatrix();
 
+        void InitEncodedColorRow();
         void InitSmallHolesMatrix();
+        void InitEncodedHolesMatrix();
+
+        void DrawEncodedColorRow();
         void DrawSmallHolesMatrix();
+
+        void SetKeyPeg(uint8_t row_idx, QColor color);
 
     protected:
 
     private:
-        shared_ptr<HoleMatrix> large_holes_row_;
+        vector<QColor> encoded_color_list_;
+        shared_ptr<HoleMatrix> encoded_color_holes_matrix_;
         shared_ptr<HoleMatrix> small_holes_matrix_;
 };
 

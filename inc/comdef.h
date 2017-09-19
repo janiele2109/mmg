@@ -1,12 +1,18 @@
 #ifndef COMDEF_H
 #define COMDEF_H
 
+#include <QString>
+#include <QRect>
+#include <QColor>
+
 namespace comdef
 {
     namespace mainwindow
     {
         constexpr uint16_t kDefWindowWidth  = 180;
-        constexpr uint16_t kDefWindowHeight = 510;
+        constexpr uint16_t kDefWindowHeight = 550;
+
+        const   QString     kTitle   =   "MasterMind";
     }
 
     namespace makerarea
@@ -64,24 +70,34 @@ namespace comdef
 
     namespace color
     {
-        const QString kRedStr       =   "red";
-        const QString kGreenStr     =   "green";
-        const QString kBlueStr      =   "blue";
-        const QString kWhiteStr     =   "white";
-        const QString kBlackStr     =   "black";
-        const QString kYellowStr    =   "yellow";
-        const QString kGreyStr      =   "grey";
+        const QString kGreenStr      =   "1-green";
+        const QString kBlueStr       =   "2-blue";
+        const QString kYellowStr     =   "3-yellow";
+        const QString kLightGreenStr =   "4-dark green";
+        const QString kBrownStr      =   "5-brown";
+        const QString kRedStr        =   "6-red";
+        const QString kBlackStr      =   "7-black";
+        const QString kWhiteStr      =   "8-white";
+        const QString kLightStr      =   "9-empty hole";
 
-        const QColor kRed       =   QColor(Qt::red);
-        const QColor kGreen     =   QColor(Qt::green);
-        const QColor kBlue      =   QColor(Qt::blue);
-        const QColor kWhite     =   QColor(Qt::white);
-        const QColor kBlack     =   QColor(Qt::black);
-        const QColor kYellow    =   QColor(Qt::yellow);
-        const QColor kGrey      =   QColor(192, 192, 192);
+        const QColor kGreen         =   QColor(Qt::green);
+        const QColor kBlue          =   QColor(Qt::blue);
+        const QColor kYellow        =   QColor(Qt::yellow);
+        const QColor kRed           =   QColor(Qt::red);
+        const QColor kBlack         =   QColor(Qt::black);
+        const QColor kWhite         =   QColor(Qt::white);
+        const QColor kLightGreen    =   QColor(0, 128, 64);
+        const QColor kBrown         =   QColor(164, 0, 0);
+        const QColor kGrey          =   QColor(192, 192, 192);
+        const QColor kLight         =   QColor(234, 234, 234);
 
         const QString kBgColorStyleRgb   =   "background-color: rgb(%1, %2, %3)";
         const QString kBgColorStyleText  =   "background-color: %1";
+    }
+
+    namespace errorMsg
+    {
+        const QString kErr001      =   "This hole does not accept Black and White color!";
     }
 
     constexpr char kEmptyString[]    = "";

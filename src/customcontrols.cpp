@@ -1,5 +1,11 @@
 #include <QApplication>
+#include <mainwindow.h>
+#include <QMessageBox>
 
+#include "mastermindgame.h"
+#include "decodingboard.h"
+#include "breakerareas.h"
+#include "holematrix.h"
 #include "customcontrols.h"
 #include "comdef.h"
 
@@ -25,7 +31,8 @@ unique_ptr<QPushButton> CustomControls::CreatePushButton(QRect rect,
     btn->resize(rect.width(), rect.height());
     btn->move(rect.x(), rect.y());
 
-    connect(btn.get(), event, receiver, handler);
+    if(event != nullptr)
+        connect(btn.get(), event, receiver, handler);
 
     return move(btn);
 
@@ -33,9 +40,9 @@ unique_ptr<QPushButton> CustomControls::CreatePushButton(QRect rect,
 
 unique_ptr<QComboBox> CustomControls::CreateComboBox(QRect rect,
                                                      map<QString, QColor> item_list,
-                                                     void(QComboBox::* /* event - unused */)(),
-                                                     CustomControls* /* receiver - unused */,
-                                                     void (CustomControls::* /* handler - unused */)())
+                                                     void(QComboBox::* /* event - reserved */)(),
+                                                     CustomControls* /* receiver - reserved */,
+                                                     void (CustomControls::* /* handler - reserved */)())
 
 {
     unique_ptr<QComboBox> comboBox(new QComboBox);
@@ -65,6 +72,29 @@ void CustomControls::SetQPushButtonColor()
         }
     }
 
-    QString style = QString(comdef::color::kBgColorStyleText).arg(combobox->currentText());
-    push_button->setStyleSheet(style);
+    if(push_button->width() == comdef::decodingboard::pushbutton::kLargeWidth &&
+       combobox->currentText().indexOf(comdef::color::kBlackStr.split('-')[1]) == -1 &&
+       combobox->currentText().indexOf(comdef::color::kWhiteStr.split('-')[1]) == -1)
+    {
+        QString style = QString(comdef::color::kBgColorStyleText).arg(combobox->currentData().toString());
+        push_button->setStyleSheet(style);
+    }
+    else
+        QMessageBox::information(nullptr, comdef::mainwindow::kTitle, comdef::errorMsg::kErr001);
+
+    MainWindow* main_window = nullptr;
+
+    foreach(QWidget *widget, app->topLevelWidgets()) {
+        if(widget->inherits("QMainWindow"))
+        {
+            main_window = static_cast<MainWindow*>(widget);
+        }
+    }
+
+    shared_ptr<MasterMindGame> master_mind_game = main_window->GetMasterMindGame();
+
+    shared_ptr<HoleMatrix> breaker_large_holes_matrix = master_mind_game->GetDecodingBoard()->GetBreakerAreas()->GetLargeHolesMatrix();
+
+    if(breaker_large_holes_matrix->IsFulfilledRow() == true)
+        master_mind_game->CheckResult();
 }

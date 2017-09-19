@@ -10,6 +10,10 @@ BreakerAreas::BreakerAreas(uint8_t num_of_rows,
                                                                                                 num_of_large_holes_per_row))
 {
     InitLargeHolesMatrix();
+
+    large_holes_matrix_->DisableAllPushButtons();
+
+    large_holes_matrix_->EnableNewRow();
 }
 
 BreakerAreas::~BreakerAreas(){}
@@ -18,13 +22,13 @@ shared_ptr<HoleMatrix> BreakerAreas::GetLargeHolesMatrix(){ return large_holes_m
 
 void BreakerAreas::InitLargeHolesMatrix()
 {
-    GetLargeHolesMatrix()->InitHolesMatrix(comdef::decodingboard::pushbutton::kInitLargeRect,
-                                           comdef::color::kGrey,
-                                           comdef::kEmptyString,
-                                           0,
-                                           &QPushButton::clicked,
-                                           new CustomControls(),
-                                           &CustomControls::SetQPushButtonColor);
+    large_holes_matrix_->InitHolesMatrix(comdef::decodingboard::pushbutton::kInitLargeRect,
+                                         comdef::color::kLight,
+                                         comdef::kEmptyString,
+                                         0,
+                                         &QPushButton::clicked,
+                                         new CustomControls(),
+                                         &CustomControls::SetQPushButtonColor);
 }
 
 void BreakerAreas::DrawLargeHolesMatrix()
@@ -41,7 +45,7 @@ void BreakerAreas::DrawLargeHolesMatrix()
 
     unique_ptr<QVBoxLayout> outter_layout(new QVBoxLayout(main_window->centralWidget()));
 
-    vector<vector<shared_ptr<QPushButton>>> large_holes_matrix = GetLargeHolesMatrix()->GetHoles();
+    vector<vector<shared_ptr<QPushButton>>> large_holes_matrix = large_holes_matrix_->GetHoles();
 
     for(auto row: large_holes_matrix)
     {

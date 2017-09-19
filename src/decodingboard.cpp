@@ -21,9 +21,11 @@ shared_ptr<MakerAreas> DecodingBoard::GetMakerAreas() { return maker_areas_; }
 
 void DecodingBoard::Draw()
 {
-    GetBreakerAreas()->DrawLargeHolesMatrix();
+    breaker_areas_->DrawLargeHolesMatrix();
 
-    GetMakerAreas()->DrawSmallHolesMatrix();
+    maker_areas_->DrawSmallHolesMatrix();
+
+    maker_areas_->DrawEncodedColorRow();
 
     DrawColorCombo();
 }
@@ -42,13 +44,15 @@ void DecodingBoard::DrawColorCombo()
 
     unique_ptr<QVBoxLayout> outter_layout(new QVBoxLayout(main_window->centralWidget()));
 
-    map<QString, QColor> item_list{{comdef::color::kRedStr,     comdef::color::kRed},
-                                   {comdef::color::kGreenStr,   comdef::color::kGreen},
-                                   {comdef::color::kBlueStr,    comdef::color::kBlue},
-                                   {comdef::color::kWhiteStr,   comdef::color::kWhite},
-                                   {comdef::color::kBlackStr,   comdef::color::kBlack},
-                                   {comdef::color::kGreyStr,    comdef::color::kGrey},
-                                   {comdef::color::kYellowStr,  comdef::color::kYellow}};
+    map<QString, QColor> item_list{{comdef::color::kRedStr,         comdef::color::kRed},
+                                   {comdef::color::kGreenStr,       comdef::color::kGreen},
+                                   {comdef::color::kBlueStr,        comdef::color::kBlue},
+                                   {comdef::color::kYellowStr,      comdef::color::kYellow},
+                                   {comdef::color::kLightStr,        comdef::color::kLight},
+                                   {comdef::color::kLightGreenStr,   comdef::color::kLightGreen},
+                                   {comdef::color::kBrownStr,       comdef::color::kBrown},
+                                   {comdef::color::kWhiteStr,       comdef::color::kWhite},
+                                   {comdef::color::kBlackStr,       comdef::color::kBlack}};
 
     unique_ptr<QComboBox> combobox = CustomControls::CreateComboBox(comdef::decodingboard::combobox::kInitRect,
                                                                     item_list,
