@@ -1,98 +1,97 @@
 #include <QApplication>
-#include <mainwindow.h>
-#include <QMessageBox>
 
-#include "mastermindgame.h"
-#include "decodingboard.h"
-#include "breakerareas.h"
-#include "holematrix.h"
 #include "customcontrols.h"
 #include "comdef.h"
+#include "mainwindow.h"
+#include "mastermindgame.h"
+#include "decodingboard.h"
+#include "breaker.h"
+#include "holematrix.h"
 
 CustomControls::CustomControls() {}
 
 CustomControls::~CustomControls() {}
 
-unique_ptr<QPushButton> CustomControls::CreatePushButton(QRect rect,
-                                                         QColor color,
-                                                         QString text,
-                                                         void (QAbstractButton::*event)(bool),
-                                                         CustomControls* receiver,
-                                                         void (CustomControls::*handler)())
-{
-    unique_ptr<QPushButton> btn(new QPushButton(text));
+unique_ptr<QPushButton> CustomControls::CreatePushButton(const QRect& rect,
+                                                         const QColor& color,
+                                                         const QString& text,
+                                                         void (QAbstractButton::* event)(bool),
+                                                         const CustomControls* receiver,
+                                                         void (CustomControls::* handler)(),
+                                                         bool enable_status)
 
-    QString style_sheet = QString(comdef::color::kBgColorStyleRgb).arg(color.red())
-                                                                  .arg(color.green())
-                                                                  .arg(color.blue());
+{
+    unique_ptr<QPushButton> btn{new QPushButton{text}};
+
+    QString style_sheet{comdef::color::kBgColorStyleText.arg(color.name())};
 
     btn->setStyleSheet(style_sheet);
 
     btn->resize(rect.width(), rect.height());
+
     btn->move(rect.x(), rect.y());
 
     if(event != nullptr)
         connect(btn.get(), event, receiver, handler);
 
-    return move(btn);
+    if(!enable_status)
+        btn->setEnabled(false);
 
+    return btn;
 }
 
-unique_ptr<QComboBox> CustomControls::CreateComboBox(QRect rect,
-                                                     map<QString, QColor> item_list,
+unique_ptr<QComboBox> CustomControls::CreateComboBox(const QRect& rect,
+                                                     const map<QString, QColor>& item_list,
                                                      void(QComboBox::* /* event - reserved */)(),
-                                                     CustomControls* /* receiver - reserved */,
+                                                     const CustomControls* /* receiver - reserved */,
                                                      void (CustomControls::* /* handler - reserved */)())
 
 {
-    unique_ptr<QComboBox> comboBox(new QComboBox);
+    unique_ptr<QComboBox> comboBox{new QComboBox};
+
+    comboBox->resize(rect.width(), rect.height());
 
     comboBox->move(rect.x(), rect.y());
-    comboBox->resize(rect.width(), rect.height());
 
     for(auto& item: item_list)
         comboBox->addItem(item.first, item.second);
 
-    comboBox->setCurrentIndex(0);
+    comboBox->setCurrentIndex(comdef::decodingboard::combobox::kInitCurrentIndex);
 
-    return move(comboBox);
+    return comboBox;
 
 }
 
 void CustomControls::SetQPushButtonColor()
-{
-    QApplication* app = static_cast<QApplication*>(QApplication::instance());
-    QComboBox* combobox = nullptr;
-    QPushButton* push_button = static_cast<QPushButton*>(QObject::sender());
+{    
+    QApplication*   app             =   dynamic_cast<QApplication*>(QApplication::instance());
+    QPushButton*    push_button     =   dynamic_cast<QPushButton*>(QObject::sender());
+    MainWindow*    main_window     =   nullptr;
+    QComboBox*      combobox        =   nullptr;
+    HoleMatrix*     holes_matrix    =   nullptr;
 
-    foreach(QWidget *widget, app->allWidgets()) {
-        if(widget->inherits("QComboBox"))
-        {
-            combobox = static_cast<QComboBox*>(widget);
-        }
-    }
+    MasterMindGame* master_mind_game = nullptr;
 
-    if(push_button->width() == comdef::decodingboard::pushbutton::kLargeWidth &&
-       combobox->currentText().indexOf(comdef::color::kBlackStr.split('-')[1]) == -1 &&
-       combobox->currentText().indexOf(comdef::color::kWhiteStr.split('-')[1]) == -1)
-    {
-        QString style = QString(comdef::color::kBgColorStyleText).arg(combobox->currentData().toString());
-        push_button->setStyleSheet(style);
-    }
+    QString         style_sheet;
 
-    MainWindow* main_window = nullptr;
+    for(QWidget* widget: app->allWidgets())
+        if(widget->inherits(comdef::decodingboard::combobox::kClassName.c_str()))
+            combobox = dynamic_cast<QComboBox*>(widget);
 
-    foreach(QWidget *widget, app->topLevelWidgets()) {
-        if(widget->inherits("QMainWindow"))
-        {
-            main_window = static_cast<MainWindow*>(widget);
-        }
-    }
+    style_sheet = comdef::color::kBgColorStyleText.arg(combobox->currentData().toString());
 
-    shared_ptr<MasterMindGame> master_mind_game = main_window->GetMasterMindGame();
+    push_button->setStyleSheet(style_sheet);
 
-    shared_ptr<HoleMatrix> breaker_large_holes_matrix = master_mind_game->GetDecodingBoard()->GetBreakerAreas()->GetLargeHolesMatrix();
+    for(QWidget* widget: app->topLevelWidgets())
+        if(widget->inherits(comdef::mainwindow::kClassName.c_str()))
+            main_window = dynamic_cast<MainWindow*>(widget);
 
-    if(breaker_large_holes_matrix->IsFulfilledRow() == true)
+    master_mind_game = main_window->GetMasterMindGame().get();
+
+    holes_matrix = master_mind_game->GetDecodingBoard()
+                                   ->GetBreaker()
+                                   ->GetHolesMatrix().get();
+
+    if(holes_matrix->IsCurrentRowFilled())
         master_mind_game->CheckResult();
 }

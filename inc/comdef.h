@@ -1,34 +1,47 @@
 #ifndef COMDEF_H
 #define COMDEF_H
 
+#include <string>
+
 #include <QString>
 #include <QRect>
 #include <QColor>
+
+using namespace std;
 
 namespace comdef
 {
     namespace mainwindow
     {
+        const string   kClassName  =   "QMainWindow";
+
         constexpr uint16_t kDefWindowWidth  = 180;
         constexpr uint16_t kDefWindowHeight = 550;
     }
 
     namespace makerarea
     {
-        constexpr uint8_t kDefNumOfRows             = 1;
-        constexpr uint8_t kDefNumOfLargeHolesPerRow = 4;
+        constexpr uint8_t kDefRowBreakIndex    = 2;
+        constexpr uint8_t kDefNumOfRows        = 1;
+        constexpr uint8_t kDefNumOfHolesPerRow = 4;
     }
 
     namespace breakerarea
     {
-        constexpr uint8_t kDefNumOfRows             = 12;
-        constexpr uint8_t kDefNumOfLargeHolesPerRow = makerarea::kDefNumOfLargeHolesPerRow;
+        constexpr uint8_t kDefRowBreakIndex    = -1;
+        constexpr int     kLastEnableRowIndex  = -1;
+        constexpr uint8_t kDefNumOfRows        = 12;
+        constexpr uint8_t kDefNumOfHolesPerRow = makerarea::kDefNumOfHolesPerRow;
     }
 
     namespace decodingboard
     {
         namespace combobox
         {
+            constexpr   uint8_t   kInitCurrentIndex = 0;
+
+            const string   kClassName  =   "QComboBox";
+
             const QRect kInitRect = QRect(10,
                                           mainwindow::kDefWindowHeight - 50,
                                           110,
@@ -64,6 +77,8 @@ namespace comdef
                                                                kSmallWidth,
                                                                kSmallHeight);
         }
+
+        constexpr   uint8_t     kDefRowBreakIndex    =   -1;
     }
 
     namespace color

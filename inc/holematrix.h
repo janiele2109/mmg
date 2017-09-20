@@ -15,37 +15,39 @@ using namespace std;
 class HoleMatrix: public CustomControls
 {
     public:
-        HoleMatrix(uint8_t num_of_rows                  = comdef::makerarea::kDefNumOfRows,
-                   uint8_t num_of_large_holes_per_row   = comdef::makerarea::kDefNumOfLargeHolesPerRow);
+        HoleMatrix(uint8_t num_of_rows            = comdef::makerarea::kDefNumOfRows,
+                   uint8_t num_of_holes_per_row   = comdef::makerarea::kDefNumOfHolesPerRow);
 
         ~HoleMatrix();
 
         uint8_t GetNumOfRows();
-        uint8_t GetHolesPerRow();
-        uint8_t GetFirstDisableRow();
+        uint8_t GetNumOfHolesPerRow();
+        uint8_t GetLastEnabledRow();
 
-        vector< vector<shared_ptr<QPushButton>> >& GetHoles();
+        const vector<vector<shared_ptr<QPushButton>>>& GetHoles();
 
-        void InitHolesMatrix(QRect      init_rect                   = comdef::decodingboard::pushbutton::kInitLargeRect,
-                             QColor     color                       = comdef::color::kGrey,
-                             QString    title                       = comdef::kEmptyString,
-                             uint8_t    breakdow_index              = 0,
-                             void (QAbstractButton::*event)(bool)   = nullptr,
-                             CustomControls* receiver               = nullptr,
-                             void (CustomControls::*handler)()      = nullptr);
+        void InitHolesMatrix(QRect            rect                      = comdef::decodingboard::pushbutton::kInitLargeRect,
+                             const QColor&    color                     = comdef::color::kGrey,
+                             const QString&   text                      = comdef::kEmptyString,
+                             const int        row_break_index           = comdef::decodingboard::kDefRowBreakIndex,
+                             void (QAbstractButton::* event)(bool)      = nullptr,
+                             const CustomControls* receiver              = nullptr,
+                             void (CustomControls::* handler)()         = nullptr);
 
-        void DisableAllPushButtons();
+        void DisableCurrentRow();
         void EnableNewRow();
-        bool IsFulfilledRow();
+        bool IsCurrentRowFilled();
+
+        void DrawHolesMatrix();
 
     protected:
 
     private:
         uint8_t num_of_rows_;
-        uint8_t holes_per_row_;
-        uint8_t first_disable_row_;
+        uint8_t num_of_holes_per_row_;
+        int     last_enabled_row_;
 
-        vector< vector<shared_ptr<QPushButton>> > holes_;
+        vector<vector<shared_ptr<QPushButton>>> holes_;
 };
 
 #endif // HOLEMATRIX_H

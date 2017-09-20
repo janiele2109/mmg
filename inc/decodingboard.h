@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class BreakerAreas;
+class Breaker;
 class MakerAreas;
 
 class DecodingBoard
@@ -14,8 +14,8 @@ class DecodingBoard
         DecodingBoard();
         ~DecodingBoard();
 
-        shared_ptr<BreakerAreas> GetBreakerAreas();
-        shared_ptr<MakerAreas> GetMakerAreas();
+        const shared_ptr<Breaker>& GetBreaker();
+        const shared_ptr<MakerAreas>& GetMaker();
 
         void Draw();
         void DrawColorCombo();
@@ -23,7 +23,7 @@ class DecodingBoard
     protected:
 
     private:
-        shared_ptr<BreakerAreas> breaker_areas_;
+        shared_ptr<Breaker>      breaker_areas_;
         shared_ptr<MakerAreas>   maker_areas_;
 };
 

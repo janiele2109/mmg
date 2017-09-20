@@ -24,7 +24,7 @@ public:
     ~MainWindow();
 
     // Janie - ADD - START
-    shared_ptr<MasterMindGame> GetMasterMindGame();
+    const shared_ptr<MasterMindGame>& GetMasterMindGame();
 
     void SetWindowSize();
     void SetWindowPos();

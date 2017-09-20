@@ -3,159 +3,155 @@
 
 #include "mastermindgame.h"
 #include "decodingboard.h"
-#include "breakerareas.h"
-#include "makerareas.h"
+#include "breaker.h"
+#include "maker.h"
 #include "holematrix.h"
 
 MasterMindGame::MasterMindGame(): decoding_board_{new DecodingBoard}{}
 
 MasterMindGame::~MasterMindGame(){}
 
-shared_ptr<DecodingBoard> MasterMindGame::GetDecodingBoard(){ return decoding_board_; }
+const shared_ptr<DecodingBoard>& MasterMindGame::GetDecodingBoard(){ return decoding_board_; }
 
-vector<encodedColorAnalized> MasterMindGame::analyzeEncodedCodeList()
+bool MasterMindGame::IsExistedInColorPattern(const QColor& color)
 {
-    vector<encodedColorAnalized> encoded_color_analyzed;
+    uint8_t num_of_holes_per_row = decoding_board_->GetMaker()->GetPatternMatrix()->GetNumOfHolesPerRow();
 
-    uint8_t num_of_holes_per_row = decoding_board_->GetMakerAreas()->GetEncodedColorList().size();
+    vector<shared_ptr<QPushButton>> color_pattern{decoding_board_->GetMaker()->GetPatternMatrix()->GetHoles()[0]};
 
-    for(uint8_t idx = 0; idx < num_of_holes_per_row; idx++)
-    {
-        QColor cur_color = decoding_board_->GetMakerAreas()->GetEncodedColorList().at(idx);
+    for(uint8_t cur_hole_index = 0; cur_hole_index < num_of_holes_per_row; cur_hole_index++)
+        if(color == color_pattern[cur_hole_index]->palette().color(QPalette::Button))
+            return true;
 
-        uint8_t i = 0;
-        bool flag = true;
-
-        for(; i < encoded_color_analyzed.size(); i++)
-            if(encoded_color_analyzed[i].dup_color == cur_color)
-            {
-                encoded_color_analyzed[i].no_of_present++;
-                flag = false;
-            }
-
-        if(flag &&
-           (encoded_color_analyzed.size() == 0 ||
-           encoded_color_analyzed.size() == i))
-        {
-            encodedColorAnalized item(cur_color, 1);
-            encoded_color_analyzed.push_back(item);
-        }
-    }
-
-    return encoded_color_analyzed;
+    return false;
 }
 
-vector<pickedColorAnalized> MasterMindGame::analyzePickedCodeList()
+bool MasterMindGame::IsSamePosInColorPattern(const QColor& color, uint8_t pos_index)
 {
-    vector<pickedColorAnalized> picked_color_analyzed;
+    uint8_t num_of_holes_per_row = decoding_board_->GetMaker()->GetPatternMatrix()->GetNumOfHolesPerRow();
 
-    uint8_t num_of_holes_per_row = decoding_board_->GetBreakerAreas()->GetLargeHolesMatrix()->GetHolesPerRow();
+    vector<shared_ptr<QPushButton>> color_pattern{decoding_board_->GetMaker()->GetPatternMatrix()->GetHoles()[0]};
 
-    for(uint8_t idx = 0; idx < num_of_holes_per_row; idx++)
+    for(uint8_t cur_hole_index = 0; cur_hole_index < num_of_holes_per_row; cur_hole_index++)
+        if(color == color_pattern[cur_hole_index]->palette().color(QPalette::Button) &&
+           cur_hole_index == pos_index)
+            return true;
+
+    return false;
+}
+
+unique_ptr<vector<AnalizedColorPattern>> MasterMindGame::AnalyzeColorPattern()
+{
+    unique_ptr<vector<AnalizedColorPattern>> analized_color_pattern{new vector<AnalizedColorPattern>};
+
+    uint8_t num_of_holes_per_row = decoding_board_->GetMaker()->GetPatternMatrix()->GetNumOfHolesPerRow();
+
+    vector<shared_ptr<QPushButton>> color_pattern{decoding_board_->GetMaker()->GetPatternMatrix()->GetHoles()[0]};
+
+    for(uint8_t cur_hole_index = 0; cur_hole_index < num_of_holes_per_row; cur_hole_index++)
     {
-        uint8_t first_disable_row = decoding_board_->GetBreakerAreas()->GetLargeHolesMatrix()->GetFirstDisableRow();
-        shared_ptr<QPushButton> push_button = decoding_board_->GetBreakerAreas()->GetLargeHolesMatrix()->GetHoles().at(first_disable_row - 1).at(idx);
+        bool existed = false;
 
-        QColor cur_color = push_button->palette().color(QPalette::Button);
+        QColor cur_color = color_pattern[cur_hole_index]->palette().color(QPalette::Button);
 
-        bool color_exists = CheckColorExistence(cur_color);
-        bool flag = true;
+        for(uint8_t color_index = 0; color_index < analized_color_pattern.get()->size(); color_index++)
+            if(analized_color_pattern.get()->at(color_index).color == cur_color)
+            {
+                analized_color_pattern.get()->at(color_index).count++;
+                existed = true;
+            }
 
-        QColor key_peg = comdef::color::kLight;
+        if(!existed)
+            analized_color_pattern.get()->push_back(AnalizedColorPattern{cur_color, 1});
+    }
 
-        if(color_exists)
-            if(SameColorPos(cur_color, idx))
-                key_peg = comdef::color::kBlack;
+    return analized_color_pattern;
+}
+
+unique_ptr<vector<AnalizedCodeColor>> MasterMindGame::AnalyzeCodeColor()
+{
+    unique_ptr<vector<AnalizedCodeColor>> analized_code_color{new vector<AnalizedCodeColor>};
+
+    uint8_t num_of_holes_per_row = decoding_board_->GetBreaker()->GetHolesMatrix()->GetNumOfHolesPerRow();
+
+    uint8_t last_enable_row_index = decoding_board_->GetBreaker()->GetHolesMatrix()->GetLastEnabledRow();
+
+    vector<shared_ptr<QPushButton>> code_color_row{decoding_board_->GetBreaker()->GetHolesMatrix()->GetHoles()[last_enable_row_index]};
+
+    for(uint8_t cur_hole_index = 0; cur_hole_index < num_of_holes_per_row; cur_hole_index++)
+    {
+        shared_ptr<QPushButton> code_color_btn = code_color_row.at(cur_hole_index);
+
+        QColor cur_color = code_color_btn->palette().color(QPalette::Button);
+
+        QColor key_color = comdef::color::kLight;
+
+        if(IsExistedInColorPattern(cur_color))
+        {
+            if(IsSamePosInColorPattern(cur_color, cur_hole_index))
+                key_color = comdef::color::kBlack;
             else
-                key_peg = comdef::color::kWhite;
-
-        uint8_t i = 0;
-
-        for(; i < picked_color_analyzed.size(); i++)
-            if(picked_color_analyzed[i].picked_color == cur_color &&
-               picked_color_analyzed[i].key_peg_color == key_peg &&
-               key_peg == comdef::color::kWhite)
-            {
-                flag = false;
-                break;
-            }
-
-        if(flag &&
-           (key_peg == comdef::color::kWhite || key_peg == comdef::color::kBlack) &&
-           (picked_color_analyzed.size() == 0 || picked_color_analyzed.size() == i))
-        {
-            pickedColorAnalized item(cur_color, key_peg);
-            picked_color_analyzed.push_back(item);
+                key_color = comdef::color::kWhite;
         }
+
+        bool skip = false;
+
+        for(uint8_t color_index = 0; color_index < analized_code_color.get()->size(); color_index++)
+            if(analized_code_color.get()->at(color_index).code_color == cur_color &&
+               analized_code_color.get()->at(color_index).key_color == key_color &&
+               key_color == comdef::color::kWhite)
+
+                skip = true;
+
+        if(!skip && key_color != comdef::color::kLight)
+            analized_code_color.get()->push_back(AnalizedCodeColor{cur_color, key_color});
     }
 
-    return picked_color_analyzed;
+    return analized_code_color;
 }
 
-bool MasterMindGame::CheckColorExistence(QColor color)
-{
-    uint8_t num_of_holes_per_row = decoding_board_->GetBreakerAreas()->GetLargeHolesMatrix()->GetHolesPerRow();
-
-    for(uint8_t idx = 0; idx < num_of_holes_per_row; idx++)
-        if(color.rgb() == decoding_board_->GetMakerAreas()->GetEncodedColorList().at(idx).rgb())
-            return true;
-
-    return false;
-}
-
-bool MasterMindGame::SameColorPos(QColor color, uint8_t index)
-{
-    uint8_t num_of_holes_per_row = decoding_board_->GetBreakerAreas()->GetLargeHolesMatrix()->GetHolesPerRow();
-
-    for(uint8_t i = 0; i < num_of_holes_per_row; i++)
-        if(color.rgb() == decoding_board_->GetMakerAreas()->GetEncodedColorList().at(i).rgb() &&
-           i == index)
-            return true;
-
-    return false;
-}
-
-uint8_t MasterMindGame::CountColor(vector<pickedColorAnalized> search_vec, QColor color)
+uint8_t MasterMindGame::CountColor(const vector<AnalizedCodeColor>& analized_code_color, const QColor& color)
 {
     uint8_t cnt = 0;
 
-    for(auto item: search_vec)
-        if(item.picked_color == color)
+    for(auto& item: analized_code_color)
+        if(item.code_color == color)
             cnt++;
 
     return cnt;
 }
-#include <QMessageBox>
-uint8_t MasterMindGame::CalculatePoint()
+
+uint8_t MasterMindGame::CalculateScores()
 {
     uint8_t final_point = 0;
-    uint8_t cur_row_idx = decoding_board_->GetBreakerAreas()->GetLargeHolesMatrix()->GetFirstDisableRow() - 1;
 
-    vector<encodedColorAnalized> encoded_color_analized = analyzeEncodedCodeList();
+    uint8_t cur_row_idx = decoding_board_->GetBreaker()->GetHolesMatrix()->GetLastEnabledRow();
 
-    vector<pickedColorAnalized> picked_color_analized = analyzePickedCodeList();
+    unique_ptr<vector<AnalizedColorPattern>> analized_color_pattern = AnalyzeColorPattern();
 
-    for(encodedColorAnalized item: encoded_color_analized)
+    unique_ptr<vector<AnalizedCodeColor>> analized_code_color = AnalyzeCodeColor();
+
+    for(AnalizedColorPattern& item: *(analized_color_pattern.get()))
     {
-        int cnt = CountColor(picked_color_analized, item.dup_color);
+        int cnt = CountColor(*(analized_code_color.get()), item.color);
 
-        while(cnt > item.no_of_present)
+        while(cnt > item.count)
         {
-            for(vector<pickedColorAnalized>::iterator it = picked_color_analized.begin(); it != picked_color_analized.end(); it++)
-                if(it->picked_color == item.dup_color &&
-                   it->key_peg_color == comdef::color::kWhite)
+            for(vector<AnalizedCodeColor>::iterator it = analized_code_color.get()->begin(); it != analized_code_color.get()->end(); it++)
+                if(it->code_color == item.color &&
+                   it->key_color == comdef::color::kWhite)
                 {
-                    picked_color_analized.erase(it);
+                    analized_code_color.get()->erase(it);
                     cnt--;
                     break;
                 }
         }
     }
 
-    for(pickedColorAnalized item: picked_color_analized)
+    for(AnalizedCodeColor& item: *(analized_code_color.get()))
     {
         final_point++;
-        decoding_board_->GetMakerAreas()->SetKeyPeg(cur_row_idx, item.key_peg_color);
+        decoding_board_->GetMaker()->SetKeyColor(cur_row_idx, item.key_color);
     }
 
     return final_point;
@@ -163,19 +159,19 @@ uint8_t MasterMindGame::CalculatePoint()
 
 void MasterMindGame::CheckResult()
 {
-    if(CalculatePoint() == comdef::makerarea::kDefNumOfLargeHolesPerRow)
+    if(CalculateScores() == comdef::makerarea::kDefNumOfHolesPerRow)
     {
-        //decoding_board_->GetMakerAreas()->DrawEncodedColorRow();
+        //decoding_board_->GetMaker()->DrawPatternMatrix();
         QMessageBox::information(nullptr, comdef::info::kAppName, "Hurray! You win!");
     }
-    else if(decoding_board_->GetBreakerAreas()->GetLargeHolesMatrix()->GetFirstDisableRow() < comdef::breakerarea::kDefNumOfRows)
+    else if(decoding_board_->GetBreaker()->GetHolesMatrix()->GetLastEnabledRow() < comdef::breakerarea::kDefNumOfRows - 1)
     {
-        decoding_board_->GetBreakerAreas()->GetLargeHolesMatrix()->DisableAllPushButtons();
-        decoding_board_->GetBreakerAreas()->GetLargeHolesMatrix()->EnableNewRow();
+        decoding_board_->GetBreaker()->GetHolesMatrix()->DisableCurrentRow();
+        decoding_board_->GetBreaker()->GetHolesMatrix()->EnableNewRow();
     }
     else
     {
-        //decoding_board_->GetMakerAreas()->DrawEncodedColorRow();
+        //decoding_board_->GetMaker()->DrawPatternMatrix();
         QMessageBox::information(nullptr, comdef::info::kAppName, "You lose!");
     }
 }

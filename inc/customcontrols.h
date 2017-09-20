@@ -19,18 +19,19 @@ class CustomControls: public QObject
         CustomControls();
         ~CustomControls();
 
-        static unique_ptr<QPushButton> CreatePushButton(QRect rect,
-                                                        QColor color,
-                                                        QString text,
-                                                        void (QAbstractButton::*event)(bool),
-                                                        CustomControls* receiver,
-                                                        void (CustomControls::*handler)());
+        static unique_ptr<QPushButton> CreatePushButton(const QRect& rect,
+                                                        const QColor& color,
+                                                        const QString& text,
+                                                        void (QAbstractButton::* event)(bool),
+                                                        const CustomControls* receiver,
+                                                        void (CustomControls::* handler)(),
+                                                        bool enable_status);
 
-        static unique_ptr<QComboBox> CreateComboBox(QRect rect,
-                                                    map<QString, QColor> item_list,
-                                                    void(QComboBox::*event)(),
-                                                    CustomControls* receiver,
-                                                    void (CustomControls::*handler)());
+        static unique_ptr<QComboBox> CreateComboBox(const QRect& rect,
+                                                    const map<QString, QColor>& item_list,
+                                                    void(QComboBox::* event)(),
+                                                    const CustomControls* receiver,
+                                                    void (CustomControls::* handler)());
 
     public slots:
         void SetQPushButtonColor();

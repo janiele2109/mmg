@@ -32,7 +32,7 @@ MainWindow::~MainWindow()
 
 // Janie - ADD - START
 
-shared_ptr<MasterMindGame> MainWindow::GetMasterMindGame(){ return master_mind_game_; }
+const shared_ptr<MasterMindGame>& MainWindow::GetMasterMindGame(){ return master_mind_game_; }
 
 void MainWindow::on_actionNewGame_triggered(){ StartNewGame(); }
 

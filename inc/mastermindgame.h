@@ -8,26 +8,16 @@ using namespace std;
 
 class DecodingBoard;
 
-struct encodedColorAnalized{
-    encodedColorAnalized(QColor color, uint8_t dup_no)
-    {
-        dup_color = color;
-        no_of_present = dup_no;
-    }
-
-    QColor dup_color;
-    uint8_t no_of_present;
+struct AnalizedColorPattern
+{
+    QColor color;
+    uint8_t count;
 };
 
-struct pickedColorAnalized{
-    pickedColorAnalized(QColor picked, QColor key)
-    {
-        picked_color = picked;
-        key_peg_color = key;
-    }
-
-    QColor picked_color;
-    QColor key_peg_color;
+struct AnalizedCodeColor
+{
+    QColor code_color;
+    QColor key_color;
 };
 
 class MasterMindGame
@@ -36,15 +26,18 @@ class MasterMindGame
         MasterMindGame();
         ~MasterMindGame();
 
-        shared_ptr<DecodingBoard> GetDecodingBoard();
+        const shared_ptr<DecodingBoard>& GetDecodingBoard();
 
-        bool CheckColorExistence(QColor color);
-        bool SameColorPos(QColor color, uint8_t pos_index);
-        uint8_t CalculatePoint();
+        bool IsExistedInColorPattern(const QColor& color);
+        bool IsSamePosInColorPattern(const QColor& color, uint8_t pos_index);
+
+        unique_ptr<vector<AnalizedColorPattern>> AnalyzeColorPattern();
+        unique_ptr<vector<AnalizedCodeColor>> AnalyzeCodeColor();
+
+        uint8_t CountColor(const vector<AnalizedCodeColor>& analized_code_color, const QColor& color);
+        uint8_t CalculateScores();
+
         void CheckResult();
-        vector<encodedColorAnalized> analyzeEncodedCodeList();
-        vector<pickedColorAnalized> analyzePickedCodeList();
-        uint8_t CountColor(vector<pickedColorAnalized> search_vec, QColor color);
 
     protected:
 

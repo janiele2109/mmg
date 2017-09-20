@@ -17,19 +17,19 @@ SOURCES += src/main.cpp\
            src/mainwindow.cpp \
     src/mastermindgame.cpp \
     src/decodingboard.cpp \
-    src/breakerareas.cpp \
-    src/makerareas.cpp \
     src/holematrix.cpp \
-    src/customcontrols.cpp
+    src/customcontrols.cpp \
+    src/breaker.cpp \
+    src/maker.cpp
 
 HEADERS  += inc/mainwindow.h \
     inc/mastermindgame.h \
     inc/decodingboard.h \
-    inc/breakerareas.h \
-    inc/makerareas.h \
     inc/holematrix.h \
     inc/customcontrols.h \
-    inc/comdef.h
+    inc/comdef.h \
+    inc/breaker.h \
+    inc/maker.h
 
 FORMS    += ui/mainwindow.ui
 
