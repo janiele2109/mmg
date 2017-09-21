@@ -46,7 +46,7 @@ void MakerAreas::InitPatternMatrix()
 
     default_random_engine rand_en{rand_dev()};
 
-    uniform_int_distribution<int> uniform_dist{0, color.size() - 1};
+    uniform_int_distribution<int> uniform_dist(0, color.size() - 1);
 
     rect.moveTo(rect.x(), new_y);
 

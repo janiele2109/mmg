@@ -54,9 +54,20 @@ void MainWindow::on_actionAbout_triggered()
 
 void MainWindow::StartNewGame()
 {
-    master_mind_game_.reset(new MasterMindGame);
+    try
+    {
+        master_mind_game_.reset(new MasterMindGame);
 
-    master_mind_game_->GetDecodingBoard()->Draw();
+        master_mind_game_->GetDecodingBoard()->Draw();
+    }
+    catch(const std::exception& e)
+    {
+        QString msg{"%1\n\n%2"};
+
+        msg.arg(comdef::error::kErr001).arg(e.what());
+
+        QMessageBox::information(nullptr, comdef::info::kAppName, msg, QMessageBox::Retry);
+    }
 }
 
 void MainWindow::SetWindowSize()

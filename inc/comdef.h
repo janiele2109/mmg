@@ -122,6 +122,11 @@ namespace comdef
 
         const QString kAppName      =   "Name: MasterMind\n\n";
     }
+
+    namespace error
+    {
+        const QString kErr001      =   "There looks like something went wrong!";
+    }
 }
 
 #endif // COMDEF_H
