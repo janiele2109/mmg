@@ -34,8 +34,6 @@ MainWindow::~MainWindow()
 
 const shared_ptr<MasterMindGame>& MainWindow::GetMasterMindGame(){ return master_mind_game_; }
 
-void MainWindow::on_actionNewGame_triggered(){ StartNewGame(); }
-
 void MainWindow::on_actionExit_triggered(){ QApplication::quit(); }
 
 void MainWindow::on_actionAbout_triggered()

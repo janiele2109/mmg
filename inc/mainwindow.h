@@ -35,8 +35,6 @@ public:
 private slots:
 
     // Janie - ADD - START
-    void on_actionNewGame_triggered();
-
     void on_actionExit_triggered();
 
     void on_actionAbout_triggered();
