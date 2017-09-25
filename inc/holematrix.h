@@ -1,3 +1,21 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \file      holematrix.h
+/// \brief     All declarations and definition for Hole Matrix
+///
+/// \author    Janie
+/// \version   1.0.0.0
+///
+/// \note
+///
+/// Version      When        Who         Remarks
+/// ===========================================================================================================================
+///
+/// 0.0.0.1      14Sep2017   Janie       First creation
+/// 1.0.0.0      25Sep2017   Janie       First release
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #ifndef HOLEMATRIX_H
 #define HOLEMATRIX_H
 
@@ -31,7 +49,7 @@ class HoleMatrix: public CustomControls
                              const QString&   text                      = comdef::kEmptyString,
                              const int        row_break_index           = comdef::decodingboard::kDefRowBreakIndex,
                              void (QAbstractButton::* event)(bool)      = nullptr,
-                             const CustomControls* receiver              = nullptr,
+                             const CustomControls* receiver             = nullptr,
                              void (CustomControls::* handler)()         = nullptr);
 
         void DisableCurrentRow();

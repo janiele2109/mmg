@@ -1,3 +1,21 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \file      maker.cpp
+/// \brief     Implementation of Maker area in Decoding board
+///
+/// \author    Janie
+/// \version   1.0.0.0
+///
+/// \note
+///
+/// Version      When        Who         Remarks
+/// ===========================================================================================================================
+///
+/// 0.0.0.1      14Sep2017   Janie       First creation
+/// 1.0.0.0      25Sep2017   Janie       First release
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #include <random>
 
 #include <QApplication>
@@ -9,21 +27,100 @@
 #include "maker.h"
 #include "holematrix.h"
 
-MakerAreas::MakerAreas(): pattern_matrix_(new HoleMatrix(comdef::makerarea::kDefNumOfRows,
-                                                         comdef::makerarea::kDefNumOfHolesPerRow)),
-                          key_matrix_(new HoleMatrix(comdef::breakerarea::kDefNumOfRows,
-                                                     comdef::breakerarea::kDefNumOfHolesPerRow))
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn         MakerAreas::MakerAreas
+/// \brief      Default constructor
+///             - Init data member (allocate memory and set default values for all push controls in Breaker area)
+///             - Initialize color pattern (assumed created by maker)
+///             - Analyze the color pattern in order to compare with pattern from breaker
+///             - Initialize key matrix (holes) in maker area
+///
+/// \param      none
+///
+/// \return     none
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+MakerAreas::MakerAreas(): pattern_matrix_{new HoleMatrix{comdef::makerarea::kDefNumOfRows,
+                                                         comdef::makerarea::kDefNumOfHolesPerRow}},
+                          analized_color_pattern_{new vector<comdef::AnalizedColorPattern>},
+                          key_matrix_{new HoleMatrix{comdef::breakerarea::kDefNumOfRows,
+                                                     comdef::breakerarea::kDefNumOfHolesPerRow}}
 {
     InitPatternMatrix();
+
+    AnalyzeColorPattern();
 
     InitKeyMatrix();
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn     MakerAreas::~MakerAreas
+/// \brief  Destructor
+///         - Cleanup activities (Do nothing right now, shared_ptr variable will be destroyed automatically)
+///
+/// \param  none
+///
+/// \return none
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 MakerAreas::~MakerAreas(){}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn     MakerAreas::GetPatternMatrix
+/// \brief  Get pattern matrix (all of push buttons in Maker area)
+///
+/// \param  none
+///
+/// \return shared_ptr<HoleMatrix>
+/// \brief  color pattern matrix in Maker area
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 shared_ptr<HoleMatrix> MakerAreas::GetPatternMatrix(){ return pattern_matrix_; }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn     MakerAreas::GetAnalizedColorPattern
+/// \brief  Get analized color pattern from color pattern in Maker area
+///
+/// \param  none
+///
+/// \return shared_ptr<vector<comdef::AnalizedColorPattern>>
+/// \brief  analized color pattern
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+shared_ptr<vector<comdef::AnalizedColorPattern>> MakerAreas::GetAnalizedColorPattern(){ return analized_color_pattern_; }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn     MakerAreas::GetKeyMatrix
+/// \brief  Get key matrix (holes) in Maker area
+///
+/// \param  none
+///
+/// \return shared_ptr<HoleMatrix>
+/// \brief  key matrix in Maker area
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 shared_ptr<HoleMatrix> MakerAreas::GetKeyMatrix(){ return key_matrix_; }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn     MakerAreas::InitPatternMatrix
+/// \brief  Initialize color pattern (assumed created by maker)
+///
+/// \param  none
+///
+/// \return void
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void MakerAreas::InitPatternMatrix()
 {
@@ -71,6 +168,17 @@ void MakerAreas::InitPatternMatrix()
     }
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn     MakerAreas::InitKeyMatrix
+/// \brief  Initialize key matrix (holes) in maker area
+///
+/// \param  none
+///
+/// \return void
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void MakerAreas::InitKeyMatrix()
 {
     QRect rect(comdef::decodingboard::pushbutton::kInitSmallRect);
@@ -96,6 +204,55 @@ void MakerAreas::InitKeyMatrix()
                                  &CustomControls::SetQPushButtonColor);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn     MakerAreas::AnalyzeColorPattern
+/// \brief  Analyze the color pattern in order to compare with pattern from breaker
+///
+/// \param  none
+///
+/// \return const shared_ptr<vector<comdef::AnalizedColorPattern>>&
+/// \brief  analized color pattern
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const shared_ptr<vector<comdef::AnalizedColorPattern>>& MakerAreas::AnalyzeColorPattern()
+{
+    uint8_t num_of_holes_per_row = GetPatternMatrix()->GetNumOfHolesPerRow();
+
+    vector<shared_ptr<QPushButton>> color_pattern{GetPatternMatrix()->GetHoles()[0]};
+
+    for(uint8_t cur_hole_index = 0; cur_hole_index < num_of_holes_per_row; cur_hole_index++)
+    {
+        bool existed = false;
+
+        QColor cur_color = color_pattern[cur_hole_index]->palette().color(QPalette::Button);
+
+        for(uint8_t color_index = 0; color_index < analized_color_pattern_.get()->size(); color_index++)
+            if(analized_color_pattern_.get()->at(color_index).color == cur_color)
+            {
+                analized_color_pattern_.get()->at(color_index).count++;
+                existed = true;
+            }
+
+        if(!existed)
+            analized_color_pattern_.get()->push_back(comdef::AnalizedColorPattern{cur_color, 1});
+    }
+
+    return analized_color_pattern_;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn     MakerAreas::DrawPatternMatrix
+/// \brief  Display color pattern matrix
+///
+/// \param  none
+///
+/// \return void
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void MakerAreas::DrawPatternMatrix()
 {
     QApplication*   app             =   dynamic_cast<QApplication*>(QApplication::instance());
@@ -120,6 +277,17 @@ void MakerAreas::DrawPatternMatrix()
     }
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn     MakerAreas::DrawKeyMatrix
+/// \brief  Display key matrix in Maker area
+///
+/// \param  none
+///
+/// \return void
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void MakerAreas::DrawKeyMatrix()
 {
     QApplication*   app             =   dynamic_cast<QApplication*>(QApplication::instance());
@@ -143,6 +311,21 @@ void MakerAreas::DrawKeyMatrix()
         outter_layout->addLayout(row_layout.get());
     }
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn     MakerAreas::SetKeyColor
+/// \brief  Set color for push button in key matrix
+///
+/// \param      row_idx
+/// \brief      index of row (corresponding with rows in Breaker area)
+///
+/// \param      color
+/// \brief      color to be set
+///
+/// \return void
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void MakerAreas::SetKeyColor(uint8_t row_idx, const QColor& color)
 {

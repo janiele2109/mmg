@@ -1,3 +1,21 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \file      customcontrols.cpp
+/// \brief     Implementation of Custom Controls lib
+///
+/// \author    Janie
+/// \version   1.0.0.0
+///
+/// \note
+///
+/// Version      When        Who         Remarks
+/// ===========================================================================================================================
+///
+/// 0.0.0.1      14Sep2017   Janie       First creation
+/// 1.0.0.0      25Sep2017   Janie       First release
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #include <QApplication>
 
 #include "customcontrols.h"
@@ -8,9 +26,69 @@
 #include "breaker.h"
 #include "holematrix.h"
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn     CustomControls::CustomControls
+/// \brief  Default constructor
+///
+/// \param  none
+///
+/// \return none
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 CustomControls::CustomControls() {}
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn     CustomControls::~CustomControls
+/// \brief  Destructor
+///         - Cleanup activities (Do nothing right now)
+///
+/// \param  none
+///
+/// \return none
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 CustomControls::~CustomControls() {}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn         CustomControls::CreatePushButton
+/// \brief      Create QT push button
+///
+/// \param      rect
+/// \brief      default size and location of push button which will be created
+///
+/// \param      color
+/// \brief      default color of disable push button
+/// \default    comdef::color::kLight
+///
+/// \param      text
+/// \brief      default text of push button (label)
+/// \default    comdef::kEmptyString
+///
+/// \param      event
+/// \brief      triggered event from push button which would be handled
+/// \default    nullptr
+///
+/// \param      receiver
+/// \brief      object which would handle triggered event
+/// \default    nullptr
+///
+/// \param      handler
+/// \brief      handler function for the triggered event
+/// \default    nullptr
+///
+/// \param      enable_status
+/// \brief      enable status of push button
+/// \default    nullptr
+///
+/// \return     unique_ptr<QPushButton>
+/// \brief      newly created push button
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 unique_ptr<QPushButton> CustomControls::CreatePushButton(const QRect& rect,
                                                          const QColor& color,
@@ -40,6 +118,34 @@ unique_ptr<QPushButton> CustomControls::CreatePushButton(const QRect& rect,
     return btn;
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn         CustomControls::CreateComboBox
+/// \brief      Create QT combobox
+///
+/// \param      rect
+/// \brief      default size and location of combobox which will be created
+///
+/// \param      item_list
+/// \brief      default items in the combobox with corresponding data
+///
+/// \param      event
+/// \brief      triggered event from push button which would be handled - reserved
+/// \default    nullptr
+///
+/// \param      receiver
+/// \brief      object which would handle triggered event - reserved
+/// \default    nullptr
+///
+/// \param      handler
+/// \brief      handler function for the triggered event - reserved
+/// \default    nullptr
+///
+/// \return     unique_ptr<QComboBox>
+/// \brief      newly created combobox
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 unique_ptr<QComboBox> CustomControls::CreateComboBox(const QRect& rect,
                                                      const map<QString, QColor>& item_list,
                                                      void(QComboBox::* /* event - reserved */)(int index),
@@ -61,6 +167,17 @@ unique_ptr<QComboBox> CustomControls::CreateComboBox(const QRect& rect,
     return comboBox;
 
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn         CustomControls::SetQPushButtonColor
+/// \brief      Handler function for triggered event (clicked), used to set color for push button
+///
+/// \param      none
+///
+/// \return     void
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void CustomControls::SetQPushButtonColor()
 {    

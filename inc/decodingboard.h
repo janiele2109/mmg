@@ -1,3 +1,21 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \file      decodingboard.h
+/// \brief     All declarations and definition for Decoding board
+///
+/// \author    Janie
+/// \version   1.0.0.0
+///
+/// \note
+///
+/// Version      When        Who         Remarks
+/// ===========================================================================================================================
+///
+/// 0.0.0.1      14Sep2017   Janie       First creation
+/// 1.0.0.0      25Sep2017   Janie       First release
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #ifndef DECODINGBOARD_H
 #define DECODINGBOARD_H
 
@@ -24,8 +42,8 @@ class DecodingBoard
     protected:
 
     private:
-        shared_ptr<Breaker>      breaker_areas_;
-        shared_ptr<MakerAreas>   maker_areas_;
+        shared_ptr<Breaker>      breaker_;
+        shared_ptr<MakerAreas>   maker_;
         shared_ptr<QComboBox>    combobox_;
 };
 

@@ -1,3 +1,21 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \file      comdef.h
+/// \brief     All common declarations and definition for the application
+///
+/// \author    Janie
+/// \version   1.0.0.0
+///
+/// \note
+///
+/// Version      When        Who         Remarks
+/// ===========================================================================================================================
+///
+/// 0.0.0.1      14Sep2017   Janie       First creation
+/// 1.0.0.0      25Sep2017   Janie       First release
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #ifndef COMDEF_H
 #define COMDEF_H
 
@@ -11,6 +29,18 @@ using namespace std;
 
 namespace comdef
 {
+    struct AnalizedColorPattern
+    {
+        QColor color;
+        uint8_t count;
+    };
+
+    struct AnalizedCodeColor
+    {
+        QColor code_color;
+        QColor key_color;
+    };
+
     namespace mainwindow
     {
         const string   kClassName  =   "QMainWindow";
