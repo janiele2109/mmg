@@ -31,12 +31,24 @@ namespace comdef
 {
     struct AnalizedColorPattern
     {
+        AnalizedColorPattern()
+        {
+            color{comdef::color::kGrey};
+            count{0};
+        }
+
         QColor color;
         uint8_t count;
     };
 
     struct AnalizedCodeColor
     {
+        AnalizedCodeColor()
+        {
+            code_color{comdef::color::kGrey};
+            key_color{comdef::color::kGrey};
+        }
+
         QColor code_color;
         QColor key_color;
     };
