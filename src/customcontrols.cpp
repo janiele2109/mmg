@@ -42,9 +42,9 @@ unique_ptr<QPushButton> CustomControls::CreatePushButton(const QRect& rect,
 
 unique_ptr<QComboBox> CustomControls::CreateComboBox(const QRect& rect,
                                                      const map<QString, QColor>& item_list,
-                                                     void(QComboBox::* /* event - reserved */)(),
+                                                     void(QComboBox::* /* event - reserved */)(int index),
                                                      const CustomControls* /* receiver - reserved */,
-                                                     void (CustomControls::* /* handler - reserved */)())
+                                                     void (CustomControls::* /* handler - reserved */)(int index))
 
 {
     unique_ptr<QComboBox> comboBox{new QComboBox};
@@ -66,7 +66,7 @@ void CustomControls::SetQPushButtonColor()
 {    
     QApplication*   app             =   dynamic_cast<QApplication*>(QApplication::instance());
     QPushButton*    push_button     =   dynamic_cast<QPushButton*>(QObject::sender());
-    MainWindow*    main_window     =   nullptr;
+    MainWindow*     main_window     =   nullptr;
     QComboBox*      combobox        =   nullptr;
     HoleMatrix*     holes_matrix    =   nullptr;
 
@@ -78,7 +78,7 @@ void CustomControls::SetQPushButtonColor()
         if(widget->inherits(comdef::decodingboard::combobox::kClassName.c_str()))
             combobox = dynamic_cast<QComboBox*>(widget);
 
-    style_sheet = comdef::color::kBgColorStyleText.arg(combobox->currentData().toString());
+    style_sheet = comdef::color::kBgColorStyleText.arg(combobox->itemData(combobox->currentIndex()).toString());
 
     push_button->setStyleSheet(style_sheet);
 

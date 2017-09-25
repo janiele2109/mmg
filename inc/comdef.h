@@ -89,9 +89,9 @@ namespace comdef
         const QString kLightGreenStr =   "4-dark green";
         const QString kBrownStr      =   "5-brown";
         const QString kRedStr        =   "6-red";
-        const QString kBlackStr      =   "7-black";
-        const QString kWhiteStr      =   "8-white";
-        const QString kLightStr      =   "9-empty hole";
+        const QString kLightStr      =   "7-empty hole";
+        const QString kBlackStr      =   "8-black";
+        const QString kWhiteStr      =   "9-white";
 
         const QColor kGreen         =   QColor(Qt::green);
         const QColor kBlue          =   QColor(Qt::blue);

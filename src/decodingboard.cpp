@@ -50,11 +50,11 @@ void DecodingBoard::DrawColorCombo()
                                    {comdef::color::kLightGreenStr,  comdef::color::kLightGreen},
                                    {comdef::color::kBrownStr,       comdef::color::kBrown}};
 
-    unique_ptr<QComboBox> combobox = CustomControls::CreateComboBox(comdef::decodingboard::combobox::kInitRect,
-                                                                    item_list,
-                                                                    nullptr,
-                                                                    nullptr,
-                                                                    nullptr);
+    combobox_ = CustomControls::CreateComboBox(comdef::decodingboard::combobox::kInitRect,
+                                               item_list,
+                                               nullptr,
+                                               nullptr,
+                                               nullptr);
 
-    outter_layout->addWidget(combobox.release());
+    outter_layout->addWidget(combobox_.get());
 }

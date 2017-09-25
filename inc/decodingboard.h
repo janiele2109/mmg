@@ -2,6 +2,7 @@
 #define DECODINGBOARD_H
 
 #include <memory>
+#include <QComboBox>
 
 using namespace std;
 
@@ -25,6 +26,7 @@ class DecodingBoard
     private:
         shared_ptr<Breaker>      breaker_areas_;
         shared_ptr<MakerAreas>   maker_areas_;
+        shared_ptr<QComboBox>    combobox_;
 };
 
 #endif // DECODINGBOARD_H

@@ -72,6 +72,7 @@ public:
 
         menuBar->addAction(menuFile->menuAction());
         menuBar->addAction(menuHelp->menuAction());
+        menuFile->addAction(actionNewGame);
         menuFile->addAction(actionExit);
         menuHelp->addAction(actionAbout);
 

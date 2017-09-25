@@ -29,9 +29,9 @@ class CustomControls: public QObject
 
         static unique_ptr<QComboBox> CreateComboBox(const QRect& rect,
                                                     const map<QString, QColor>& item_list,
-                                                    void(QComboBox::* event)(),
+                                                    void(QComboBox::*)(int index),
                                                     const CustomControls* receiver,
-                                                    void (CustomControls::* handler)());
+                                                    void (CustomControls::* handler)(int index));
 
     public slots:
         void SetQPushButtonColor();

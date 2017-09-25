@@ -40,6 +40,8 @@ private slots:
     void on_actionAbout_triggered();
     // Janie - ADD - END
 
+    void on_actionNewGame_triggered();
+
 private:
     Ui::MainWindow *ui;
 

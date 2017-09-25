@@ -2,6 +2,7 @@
 #define MASTERMINDGAME_H
 
 #include <QColor>
+#include <QComboBox>
 #include <memory>
 
 using namespace std;

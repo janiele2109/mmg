@@ -204,7 +204,6 @@ DIST          = /opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_post.prf \
-		../MasterMind/mmg/.qmake.stash \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/default_pre.prf \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/resolve_config.prf \
@@ -382,7 +381,6 @@ Makefile: ../MasterMind/mmg/MasterMind.pro /opt/Qt5.7.0/5.7/gcc_64/mkspecs/linux
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/default_pre.prf \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/resolve_config.prf \
@@ -540,7 +538,6 @@ Makefile: ../MasterMind/mmg/MasterMind.pro /opt/Qt5.7.0/5.7/gcc_64/mkspecs/linux
 /opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/qt_config.prf:
 /opt/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++/qmake.conf:
 /opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/exclusive_builds.prf:
 /opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/default_pre.prf:
 /opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/resolve_config.prf:
@@ -722,6 +719,20 @@ moc_mainwindow.cpp: /opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qicon.h \
 		../MasterMind/mmg/inc/mastermindgame.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/QColor \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QComboBox \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qcombobox.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qstyleoption.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qvalidator.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qregularexpression.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qslider.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractslider.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qstyle.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qtabbar.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qrubberband.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
 		../MasterMind/mmg/inc/mainwindow.h \
 		/opt/Qt5.7.0/5.7/gcc_64/bin/moc
 	/opt/Qt5.7.0/5.7/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++ -I/home/janiele/workspace/MasterMind/mmg -I/home/janiele/workspace/MasterMind/mmg/inc -I/opt/Qt5.7.0/5.7/gcc_64/include -I/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets -I/opt/Qt5.7.0/5.7/gcc_64/include/QtGui -I/opt/Qt5.7.0/5.7/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../MasterMind/mmg/inc/mainwindow.h -o moc_mainwindow.cpp
@@ -970,6 +981,20 @@ main.o: ../MasterMind/mmg/src/main.cpp ../MasterMind/mmg/inc/mainwindow.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qicon.h \
 		../MasterMind/mmg/inc/mastermindgame.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/QColor \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QComboBox \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qcombobox.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qstyleoption.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qvalidator.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qregularexpression.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qslider.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractslider.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qstyle.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qtabbar.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qrubberband.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QApplication \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qapplication.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1082,6 +1107,20 @@ mainwindow.o: ../MasterMind/mmg/src/mainwindow.cpp ../MasterMind/mmg/inc/mainwin
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qicon.h \
 		../MasterMind/mmg/inc/mastermindgame.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/QColor \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QComboBox \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qcombobox.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qstyleoption.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qvalidator.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qregularexpression.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qslider.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractslider.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qstyle.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qtabbar.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qrubberband.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
 		ui_mainwindow.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QDesktopWidget \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qdesktopwidget.h \
@@ -1097,20 +1136,6 @@ mainwindow.o: ../MasterMind/mmg/src/mainwindow.cpp ../MasterMind/mmg/inc/mainwin
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qpushbutton.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../MasterMind/mmg/inc/customcontrols.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QComboBox \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qcombobox.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qstyleoption.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qvalidator.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qregularexpression.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qslider.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractslider.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qstyle.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qtabbar.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qrubberband.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QObject
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../MasterMind/mmg/src/mainwindow.cpp
 
@@ -1216,6 +1241,22 @@ mastermindgame.o: ../MasterMind/mmg/src/mastermindgame.cpp /opt/Qt5.7.0/5.7/gcc_
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qtouchdevice.h \
 		../MasterMind/mmg/inc/mastermindgame.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/QColor \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QComboBox \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qcombobox.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qstyleoption.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qvalidator.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qregularexpression.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qicon.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qslider.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractslider.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qstyle.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qtabbar.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qtabwidget.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qrubberband.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
 		../MasterMind/mmg/inc/decodingboard.h \
 		../MasterMind/mmg/inc/breaker.h \
 		../MasterMind/mmg/inc/comdef.h \
@@ -1226,23 +1267,7 @@ mastermindgame.o: ../MasterMind/mmg/src/mastermindgame.cpp /opt/Qt5.7.0/5.7/gcc_
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QPushButton \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qpushbutton.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractbutton.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qicon.h \
 		../MasterMind/mmg/inc/customcontrols.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QComboBox \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qcombobox.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qstyleoption.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qvalidator.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qregularexpression.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qslider.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractslider.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qstyle.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qtabbar.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qtabwidget.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qrubberband.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QObject
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mastermindgame.o ../MasterMind/mmg/src/mastermindgame.cpp
 
