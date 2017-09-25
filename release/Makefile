@@ -733,6 +733,9 @@ moc_mainwindow.cpp: /opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qrubberband.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../MasterMind/mmg/inc/comdef.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QString \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QRect \
 		../MasterMind/mmg/inc/mainwindow.h \
 		/opt/Qt5.7.0/5.7/gcc_64/bin/moc
 	/opt/Qt5.7.0/5.7/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++ -I/home/janiele/workspace/MasterMind/mmg -I/home/janiele/workspace/MasterMind/mmg/inc -I/opt/Qt5.7.0/5.7/gcc_64/include -I/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets -I/opt/Qt5.7.0/5.7/gcc_64/include/QtGui -I/opt/Qt5.7.0/5.7/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../MasterMind/mmg/inc/mainwindow.h -o moc_mainwindow.cpp
@@ -855,6 +858,8 @@ moc_customcontrols.cpp: /opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QPushButton \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QRect \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/QColor \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QObject \
+		../MasterMind/mmg/inc/comdef.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QString \
 		../MasterMind/mmg/inc/customcontrols.h \
 		/opt/Qt5.7.0/5.7/gcc_64/bin/moc
 	/opt/Qt5.7.0/5.7/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++ -I/home/janiele/workspace/MasterMind/mmg -I/home/janiele/workspace/MasterMind/mmg/inc -I/opt/Qt5.7.0/5.7/gcc_64/include -I/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets -I/opt/Qt5.7.0/5.7/gcc_64/include/QtGui -I/opt/Qt5.7.0/5.7/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../MasterMind/mmg/inc/customcontrols.h -o moc_customcontrols.cpp
@@ -995,6 +1000,9 @@ main.o: ../MasterMind/mmg/src/main.cpp ../MasterMind/mmg/inc/mainwindow.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qrubberband.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../MasterMind/mmg/inc/comdef.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QString \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QRect \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QApplication \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qapplication.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1121,15 +1129,15 @@ mainwindow.o: ../MasterMind/mmg/src/mainwindow.cpp ../MasterMind/mmg/inc/mainwin
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qrubberband.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../MasterMind/mmg/inc/comdef.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QString \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QRect \
 		ui_mainwindow.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QDesktopWidget \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QMessageBox \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qmessagebox.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qdialog.h \
-		../MasterMind/mmg/inc/comdef.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QString \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QRect \
 		../MasterMind/mmg/inc/decodingboard.h \
 		../MasterMind/mmg/inc/holematrix.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QPushButton \
@@ -1257,11 +1265,11 @@ mastermindgame.o: ../MasterMind/mmg/src/mastermindgame.cpp /opt/Qt5.7.0/5.7/gcc_
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qrubberband.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
-		../MasterMind/mmg/inc/decodingboard.h \
-		../MasterMind/mmg/inc/breaker.h \
 		../MasterMind/mmg/inc/comdef.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QString \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QRect \
+		../MasterMind/mmg/inc/decodingboard.h \
+		../MasterMind/mmg/inc/breaker.h \
 		../MasterMind/mmg/inc/maker.h \
 		../MasterMind/mmg/inc/holematrix.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QPushButton \
