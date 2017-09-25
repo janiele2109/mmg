@@ -21,51 +21,50 @@
 
 #include <QMainWindow>
 
-// Janie - ADD - START
 #include <memory>
 
 #include "mastermindgame.h"
 
 using namespace std;
-// Janie - ADD - END
 
-namespace Ui {
-class MainWindow;
+namespace Ui
+{
+    class MainWindow;
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \class      MainWindow
+/// \brief      Abstract object which is responsible for main window
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    public:
+        explicit MainWindow(QWidget *parent = nullptr);
+        ~MainWindow();
 
-    // Janie - ADD - START
-    const shared_ptr<MasterMindGame>& GetMasterMindGame();
+        const shared_ptr<MasterMindGame>& GetMasterMindGame();
 
-    void SetWindowSize();
-    void SetWindowPos();
+        void SetWindowSize();
+        void SetWindowPos();
 
-    void StartNewGame();
-    // Janie - ADD - END
+        void StartNewGame();
 
-private slots:
+    private slots:
+        void on_actionExit_triggered();
+        void on_actionAbout_triggered();
+        void on_actionNewGame_triggered();
 
-    // Janie - ADD - START
-    void on_actionExit_triggered();
+    private:
+        /// handle ui of the application
+        Ui::MainWindow* ui;
 
-    void on_actionAbout_triggered();
-    // Janie - ADD - END
-
-    void on_actionNewGame_triggered();
-
-private:
-    Ui::MainWindow *ui;
-
-    // Janie - ADD - START
-    shared_ptr<MasterMindGame> master_mind_game_;
-    // Janie - ADD - END
+        /// handle processing for master mind game
+        shared_ptr<MasterMindGame> master_mind_game_;
 };
 
 #endif // MAINWINDOW_H

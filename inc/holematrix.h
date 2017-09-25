@@ -30,6 +30,13 @@
 
 using namespace std;
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \class      HoleMatrix
+/// \brief      Abstract object which is responsible for holes used in decoding board
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 class HoleMatrix: public CustomControls
 {
     public:
@@ -61,10 +68,16 @@ class HoleMatrix: public CustomControls
     protected:
 
     private:
+        /// number of rows in the matrix
         uint8_t num_of_rows_;
+
+        /// number of holes per row in the matrix
         uint8_t num_of_holes_per_row_;
+
+        /// index of last enabled row in the breaker area
         int     last_enabled_row_;
 
+        /// holes matrix
         vector<vector<shared_ptr<QPushButton>>> holes_;
 };
 
