@@ -16,14 +16,12 @@
 ///
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-
 #include <QDesktopWidget>
 #include <QMessageBox>
 
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include "comdef.h"
-
 #include "decodingboard.h"
 #include "holematrix.h"
 

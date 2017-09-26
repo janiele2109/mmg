@@ -39,7 +39,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 DecodingBoard::DecodingBoard(): breaker_{new Breaker},
-                                maker_{new MakerAreas}
+                                maker_{new Maker}
 {}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -77,12 +77,40 @@ const shared_ptr<Breaker>& DecodingBoard::GetBreaker(){ return breaker_; }
 ///
 /// \param  none
 ///
-/// \return const shared_ptr<MakerAreas>&
+/// \return const shared_ptr<Maker>&
 /// \brief  maker
 ///
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const shared_ptr<MakerAreas>& DecodingBoard::GetMaker() { return maker_; }
+const shared_ptr<Maker>& DecodingBoard::GetMaker() { return maker_; }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn     DecodingBoard::GetColorComboxBox
+/// \brief  Get color combobox
+///
+/// \param  none
+///
+/// \return const shared_ptr<QComboBox>&
+/// \brief  color combobox
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const shared_ptr<QComboBox>& DecodingBoard::GetColorComboxBox() { return color_combobox_; }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn     DecodingBoard::GetDisplayPatternCheckBox
+/// \brief  Get display pattern checkbox
+///
+/// \param  none
+///
+/// \return const shared_ptr<QCheckBox>&
+/// \brief  display pattern checkbox
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const shared_ptr<QCheckBox>& DecodingBoard::GetDisplayPatternCheckBox() { return display_pattern_checkbox_; }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///
@@ -101,9 +129,11 @@ void DecodingBoard::Draw()
 
     maker_->DrawKeyMatrix();
 
-    maker_->DrawPatternMatrix();
+    //maker_->DrawPatternMatrix();
 
     DrawColorCombo();
+
+    DrawCheckbox();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -136,11 +166,42 @@ void DecodingBoard::DrawColorCombo()
                                    {comdef::color::kLightGreenStr,  comdef::color::kLightGreen},
                                    {comdef::color::kBrownStr,       comdef::color::kBrown}};
 
-    combobox_ = CustomControls::CreateComboBox(comdef::decodingboard::combobox::kInitRect,
+    color_combobox_ = CustomControls::CreateComboBox(comdef::decodingboard::combobox::kInitRect,
                                                item_list,
                                                nullptr,
                                                nullptr,
                                                nullptr);
 
-    outter_layout->addWidget(combobox_.get());
+    outter_layout->addWidget(color_combobox_.get());
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn     DecodingBoard::DrawCheckBox
+/// \brief  Draw checkbox
+///
+/// \param  none
+///
+/// \return void
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void DecodingBoard::DrawCheckbox()
+{
+    QApplication*   app             =   dynamic_cast<QApplication*>(QApplication::instance());
+    QMainWindow*    main_window     =   nullptr;
+
+    for(QWidget* widget: app->topLevelWidgets())
+        if(widget->inherits(comdef::mainwindow::kClassName.c_str()))
+            main_window = dynamic_cast<QMainWindow*>(widget);
+
+    unique_ptr<QVBoxLayout> outter_layout{new QVBoxLayout{main_window->centralWidget()}};
+
+    display_pattern_checkbox_ = CustomControls::CreateCheckBox(comdef::decodingboard::checkbox::kInitRect,
+                                                               comdef::decodingboard::checkbox::kDisplayColorPattern,
+                                                               &QCheckBox::clicked,
+                                                               new CustomControls(),
+                                                               &CustomControls::DisplayColorPattern);
+
+    outter_layout->addWidget(display_pattern_checkbox_.get());
 }

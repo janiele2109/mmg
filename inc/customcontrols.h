@@ -23,6 +23,7 @@
 
 #include <QPushButton>
 #include <QComboBox>
+#include <QCheckBox>
 #include <QRect>
 #include <QColor>
 #include <QObject>
@@ -56,12 +57,19 @@ class CustomControls: public QObject
 
         static unique_ptr<QComboBox> CreateComboBox(const QRect& rect,
                                                     const map<QString, QColor>& item_list,
-                                                    void(QComboBox::*)(int index),
+                                                    void(QComboBox::* event)(int index),
                                                     const CustomControls* receiver,
                                                     void (CustomControls::* handler)(int index));
 
+        static unique_ptr<QCheckBox> CreateCheckBox(const QRect& rect,
+                                                    const QString& text = comdef::kEmptyString,
+                                                    void (QCheckBox::* event)(bool checked) = nullptr,
+                                                    const CustomControls* receiver = nullptr,
+                                                    void (CustomControls::* handler)(bool checked) = nullptr);
+
     public slots:
         void SetQPushButtonColor();
+        void DisplayColorPattern(bool checked = true);
 
     private:
 

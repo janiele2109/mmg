@@ -269,19 +269,10 @@ uint8_t MasterMindGame::CalculateScores()
 
 void MasterMindGame::CheckResult()
 {
-    if(CalculateScores() == comdef::makerarea::kDefNumOfHolesPerRow)
-    {
-        //decoding_board_->GetMaker()->DrawPatternMatrix();
+    decoding_board_->GetMaker()->DrawPatternMatrix();
+
+    if(decoding_board_->GetBreaker()->GetHolesMatrix()->GetLastEnabledRow() < comdef::breakerarea::kDefNumOfRows - 1)
         QMessageBox::information(nullptr, comdef::info::kAppName, "Hurray! You win!");
-    }
-    else if(decoding_board_->GetBreaker()->GetHolesMatrix()->GetLastEnabledRow() < comdef::breakerarea::kDefNumOfRows - 1)
-    {
-        decoding_board_->GetBreaker()->GetHolesMatrix()->DisableCurrentRow();
-        decoding_board_->GetBreaker()->GetHolesMatrix()->EnableNewRow();
-    }
     else
-    {
-        //decoding_board_->GetMaker()->DrawPatternMatrix();
         QMessageBox::information(nullptr, comdef::info::kAppName, "You lose!");
-    }
 }

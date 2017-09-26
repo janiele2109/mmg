@@ -204,6 +204,7 @@ DIST          = /opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_post.prf \
+		../MasterMind/mmg/.qmake.stash \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/default_pre.prf \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/resolve_config.prf \
@@ -381,6 +382,7 @@ Makefile: ../MasterMind/mmg/MasterMind.pro /opt/Qt5.7.0/5.7/gcc_64/mkspecs/linux
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/default_pre.prf \
 		/opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/resolve_config.prf \
@@ -538,6 +540,7 @@ Makefile: ../MasterMind/mmg/MasterMind.pro /opt/Qt5.7.0/5.7/gcc_64/mkspecs/linux
 /opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/qt_config.prf:
 /opt/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++/qmake.conf:
 /opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/exclusive_builds.prf:
 /opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/default_pre.prf:
 /opt/Qt5.7.0/5.7/gcc_64/mkspecs/features/resolve_config.prf:
@@ -855,6 +858,8 @@ moc_customcontrols.cpp: /opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QPushButton \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qrubberband.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QCheckBox \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qcheckbox.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QRect \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/QColor \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QObject \
@@ -883,11 +888,9 @@ compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean
 
 ####### Compile
 
-main.o: ../MasterMind/mmg/src/main.cpp ../MasterMind/mmg/inc/mainwindow.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QMainWindow \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qmainwindow.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qwidget.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qwindowdefs.h \
+main.o: ../MasterMind/mmg/src/main.cpp /opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QApplication \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qapplication.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qcoreapplication.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qglobal.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qconfig.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qfeatures.h \
@@ -910,17 +913,16 @@ main.o: ../MasterMind/mmg/src/main.cpp ../MasterMind/mmg/inc/mainwindow.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qmutex.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qnumeric.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qversiontagging.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qobjectdefs.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qnamespace.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qwindowdefs_win.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qobject.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qstring.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qchar.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qbytearray.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qrefcount.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qnamespace.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qarraydata.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qlist.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qalgorithms.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qiterator.h \
@@ -936,11 +938,17 @@ main.o: ../MasterMind/mmg/src/main.cpp ../MasterMind/mmg/inc/mainwindow.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qvarlengtharray.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qcontainerfwd.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qeventloop.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qwindowdefs.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qpoint.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qsize.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qcursor.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qwidget.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qmargins.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qpaintdevice.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qrect.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qsize.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qpoint.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qpalette.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qcolor.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qrgb.h \
@@ -966,7 +974,6 @@ main.o: ../MasterMind/mmg/src/main.cpp ../MasterMind/mmg/inc/mainwindow.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qfontmetrics.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qfontinfo.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qsizepolicy.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qcursor.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qkeysequence.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qevent.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qvariant.h \
@@ -982,6 +989,11 @@ main.o: ../MasterMind/mmg/src/main.cpp ../MasterMind/mmg/inc/mainwindow.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qfiledevice.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qvector2d.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qtouchdevice.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qguiapplication.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qinputmethod.h \
+		../MasterMind/mmg/inc/mainwindow.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QMainWindow \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qicon.h \
 		../MasterMind/mmg/inc/mastermindgame.h \
@@ -1002,19 +1014,11 @@ main.o: ../MasterMind/mmg/src/main.cpp ../MasterMind/mmg/inc/mainwindow.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
 		../MasterMind/mmg/inc/comdef.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QString \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QRect \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QApplication \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qapplication.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qcoreapplication.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qeventloop.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qguiapplication.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qinputmethod.h
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QRect
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../MasterMind/mmg/src/main.cpp
 
-mainwindow.o: ../MasterMind/mmg/src/mainwindow.cpp ../MasterMind/mmg/inc/mainwindow.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QMainWindow \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qmainwindow.h \
+mainwindow.o: ../MasterMind/mmg/src/mainwindow.cpp /opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QDesktopWidget \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qwidget.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qwindowdefs.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qglobal.h \
@@ -1111,6 +1115,12 @@ mainwindow.o: ../MasterMind/mmg/src/mainwindow.cpp ../MasterMind/mmg/inc/mainwin
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qfiledevice.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qvector2d.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qtouchdevice.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QMessageBox \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qmessagebox.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qdialog.h \
+		../MasterMind/mmg/inc/mainwindow.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QMainWindow \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/qicon.h \
 		../MasterMind/mmg/inc/mastermindgame.h \
@@ -1133,16 +1143,13 @@ mainwindow.o: ../MasterMind/mmg/src/mainwindow.cpp ../MasterMind/mmg/inc/mainwin
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QString \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QRect \
 		ui_mainwindow.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QDesktopWidget \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QMessageBox \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qmessagebox.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qdialog.h \
 		../MasterMind/mmg/inc/decodingboard.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QCheckBox \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qcheckbox.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../MasterMind/mmg/inc/holematrix.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QPushButton \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qpushbutton.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../MasterMind/mmg/inc/customcontrols.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QObject
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../MasterMind/mmg/src/mainwindow.cpp
@@ -1269,12 +1276,14 @@ mastermindgame.o: ../MasterMind/mmg/src/mastermindgame.cpp /opt/Qt5.7.0/5.7/gcc_
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QString \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QRect \
 		../MasterMind/mmg/inc/decodingboard.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QCheckBox \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qcheckbox.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../MasterMind/mmg/inc/breaker.h \
 		../MasterMind/mmg/inc/maker.h \
 		../MasterMind/mmg/inc/holematrix.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QPushButton \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qpushbutton.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../MasterMind/mmg/inc/customcontrols.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QObject
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mastermindgame.o ../MasterMind/mmg/src/mastermindgame.cpp
@@ -1406,6 +1415,9 @@ decodingboard.o: ../MasterMind/mmg/src/decodingboard.cpp /opt/Qt5.7.0/5.7/gcc_64
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
 		../MasterMind/mmg/inc/decodingboard.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QCheckBox \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qcheckbox.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../MasterMind/mmg/inc/comdef.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QString \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QRect \
@@ -1415,7 +1427,6 @@ decodingboard.o: ../MasterMind/mmg/src/decodingboard.cpp /opt/Qt5.7.0/5.7/gcc_64
 		../MasterMind/mmg/inc/holematrix.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QPushButton \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qpushbutton.h \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../MasterMind/mmg/inc/customcontrols.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QObject
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o decodingboard.o ../MasterMind/mmg/src/decodingboard.cpp
@@ -1555,6 +1566,8 @@ holematrix.o: ../MasterMind/mmg/src/holematrix.cpp /opt/Qt5.7.0/5.7/gcc_64/inclu
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qrubberband.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QCheckBox \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qcheckbox.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QObject
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o holematrix.o ../MasterMind/mmg/src/holematrix.cpp
 
@@ -1681,6 +1694,8 @@ customcontrols.o: ../MasterMind/mmg/src/customcontrols.cpp /opt/Qt5.7.0/5.7/gcc_
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qrubberband.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QCheckBox \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qcheckbox.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QRect \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/QColor \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QObject \
@@ -1692,6 +1707,7 @@ customcontrols.o: ../MasterMind/mmg/src/customcontrols.cpp /opt/Qt5.7.0/5.7/gcc_
 		../MasterMind/mmg/inc/mastermindgame.h \
 		../MasterMind/mmg/inc/decodingboard.h \
 		../MasterMind/mmg/inc/breaker.h \
+		../MasterMind/mmg/inc/maker.h \
 		../MasterMind/mmg/inc/holematrix.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o customcontrols.o ../MasterMind/mmg/src/customcontrols.cpp
 
@@ -1817,6 +1833,8 @@ breaker.o: ../MasterMind/mmg/src/breaker.cpp ../MasterMind/mmg/inc/breaker.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qrubberband.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QCheckBox \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qcheckbox.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QObject
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o breaker.o ../MasterMind/mmg/src/breaker.cpp
 
@@ -1933,11 +1951,11 @@ maker.o: ../MasterMind/mmg/src/maker.cpp /opt/Qt5.7.0/5.7/gcc_64/include/QtWidge
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qlayoutitem.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgridlayout.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QGridLayout \
+		../MasterMind/mmg/inc/maker.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/QColor \
 		../MasterMind/mmg/inc/comdef.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QString \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QRect \
-		/opt/Qt5.7.0/5.7/gcc_64/include/QtGui/QColor \
-		../MasterMind/mmg/inc/maker.h \
 		../MasterMind/mmg/inc/holematrix.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QPushButton \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qpushbutton.h \
@@ -1957,6 +1975,8 @@ maker.o: ../MasterMind/mmg/src/maker.cpp /opt/Qt5.7.0/5.7/gcc_64/include/QtWidge
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qrubberband.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QCheckBox \
+		/opt/Qt5.7.0/5.7/gcc_64/include/QtWidgets/qcheckbox.h \
 		/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QObject
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o maker.o ../MasterMind/mmg/src/maker.cpp
 

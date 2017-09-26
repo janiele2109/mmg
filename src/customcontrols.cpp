@@ -24,6 +24,7 @@
 #include "mastermindgame.h"
 #include "decodingboard.h"
 #include "breaker.h"
+#include "maker.h"
 #include "holematrix.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -170,6 +171,53 @@ unique_ptr<QComboBox> CustomControls::CreateComboBox(const QRect& rect,
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///
+/// \fn         CustomControls::CreateCheckBox
+/// \brief      Create QT checkbox
+///
+/// \param      rect
+/// \brief      default size and location of checkbox which will be created
+///
+/// \param      text
+/// \brief      default text of checkbox
+/// \default    comdef::kEmptyString
+///
+/// \param      event
+/// \brief      triggered event from checkbox which would be handled
+/// \default    nullptr
+///
+/// \param      receiver
+/// \brief      object which would handle triggered event
+/// \default    nullptr
+///
+/// \param      handler
+/// \brief      handler function for the triggered event
+/// \default    nullptr
+///
+/// \return     unique_ptr<QCheckBox>
+/// \brief      newly created checkbox
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+unique_ptr<QCheckBox> CustomControls::CreateCheckBox(const QRect& rect,
+                                                     const QString& text,
+                                                     void (QCheckBox::* event)(bool checked),
+                                                     const CustomControls* receiver,
+                                                     void (CustomControls::* handler)(bool checked))
+{
+    unique_ptr<QCheckBox> checkbox{new QCheckBox{text}};
+
+    checkbox->resize(rect.width(), rect.height());
+
+    checkbox->move(rect.x(), rect.y());
+
+    if(event != nullptr)
+        connect(checkbox.get(), event, receiver, handler);
+
+    return checkbox;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
 /// \fn         CustomControls::SetQPushButtonColor
 /// \brief      Handler function for triggered event (clicked), used to set color for push button
 ///
@@ -211,4 +259,42 @@ void CustomControls::SetQPushButtonColor()
 
     if(holes_matrix->IsCurrentRowFilled())
         master_mind_game->CheckResult();
+    else
+    {
+        master_mind_game->GetDecodingBoard()->GetBreaker()->GetHolesMatrix()->DisableCurrentRow();
+        master_mind_game->GetDecodingBoard()->GetBreaker()->GetHolesMatrix()->EnableNewRow();
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \fn         CustomControls::DisplayColorPattern
+/// \brief      Handler function for triggered event (clicked), used to display color pattern in Maker area
+///
+/// \param      checked
+/// \brief      checked status of display color pattern checkbox
+///
+/// \return     void
+///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void CustomControls::DisplayColorPattern(bool checked)
+{
+    QApplication*       app            =   dynamic_cast<QApplication*>(QApplication::instance());
+    MainWindow*         main_window    =   nullptr;
+    shared_ptr<Maker>   maker          =   nullptr;
+
+    MasterMindGame* master_mind_game = nullptr;
+
+    for(QWidget* widget: app->topLevelWidgets())
+        if(widget->inherits(comdef::mainwindow::kClassName.c_str()))
+            main_window = dynamic_cast<MainWindow*>(widget);
+
+    master_mind_game = main_window->GetMasterMindGame().get();
+
+    maker = master_mind_game->GetDecodingBoard()
+                            ->GetMaker();
+
+    if(checked)
+        maker->DrawPatternMatrix();
 }

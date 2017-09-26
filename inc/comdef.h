@@ -29,36 +29,12 @@ using namespace std;
 
 namespace comdef
 {
-    struct AnalizedColorPattern
-    {
-        AnalizedColorPattern()
-        {
-            color{comdef::color::kGrey};
-            count{0};
-        }
-
-        QColor color;
-        uint8_t count;
-    };
-
-    struct AnalizedCodeColor
-    {
-        AnalizedCodeColor()
-        {
-            code_color{comdef::color::kGrey};
-            key_color{comdef::color::kGrey};
-        }
-
-        QColor code_color;
-        QColor key_color;
-    };
-
     namespace mainwindow
     {
         const string   kClassName  =   "QMainWindow";
 
-        constexpr uint16_t kDefWindowWidth  = 180;
-        constexpr uint16_t kDefWindowHeight = 550;
+        constexpr uint16_t kDefWindowWidth  = 165;
+        constexpr uint16_t kDefWindowHeight = 580;
     }
 
     namespace makerarea
@@ -85,8 +61,20 @@ namespace comdef
             const string   kClassName  =   "QComboBox";
 
             const QRect kInitRect = QRect(10,
-                                          mainwindow::kDefWindowHeight - 50,
+                                          mainwindow::kDefWindowHeight - 80,
                                           110,
+                                          20);
+        }
+
+        namespace checkbox
+        {
+            const string   kClassName               =   "QCheckBox";
+
+            const QString  kDisplayColorPattern     =   "Display color pattern";
+
+            const QRect kInitRect = QRect(10,
+                                          mainwindow::kDefWindowHeight - 50,
+                                          150,
                                           20);
         }
 
@@ -169,6 +157,26 @@ namespace comdef
     {
         const QString kErr001      =   "There looks like something went wrong!";
     }
+
+    struct AnalizedColorPattern
+    {
+        AnalizedColorPattern(QColor clr = comdef::color::kGrey,
+                             uint8_t cnt = 0): color{clr},
+                                               count{cnt}{}
+
+        QColor color;
+        uint8_t count;
+    };
+
+    struct AnalizedCodeColor
+    {
+        AnalizedCodeColor(QColor code = comdef::color::kGrey,
+                          QColor key = comdef::color::kGrey): code_color{code},
+                                                              key_color{key}{}
+
+        QColor code_color;
+        QColor key_color;
+    };
 }
 
 #endif // COMDEF_H

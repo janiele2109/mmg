@@ -37,12 +37,12 @@ class HoleMatrix;
 ///
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class MakerAreas
+class Maker
 {
     public:
-        MakerAreas();
+        Maker();
 
-        ~MakerAreas();
+        ~Maker();
 
         shared_ptr<HoleMatrix>                            GetPatternMatrix();
         shared_ptr<vector<comdef::AnalizedColorPattern>>  GetAnalizedColorPattern();
@@ -54,6 +54,7 @@ class MakerAreas
         const shared_ptr<vector<comdef::AnalizedColorPattern>>& AnalyzeColorPattern();
 
         void DrawPatternMatrix();
+        void HidePatternMatrix();
         void DrawKeyMatrix();
 
         void SetKeyColor(uint8_t row_idx,

@@ -19,11 +19,12 @@
 #ifndef MASTERMINDGAME_H
 #define MASTERMINDGAME_H
 
-#include <QColor>
-#include <QComboBox>
 #include <memory>
 
-#include <comdef.h>
+#include <QColor>
+#include <QComboBox>
+
+#include "comdef.h"
 
 using namespace std;
 

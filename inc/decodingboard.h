@@ -20,12 +20,14 @@
 #define DECODINGBOARD_H
 
 #include <memory>
+
 #include <QComboBox>
+#include <QCheckBox>
 
 using namespace std;
 
 class Breaker;
-class MakerAreas;
+class Maker;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///
@@ -41,17 +43,28 @@ class DecodingBoard
         ~DecodingBoard();
 
         const shared_ptr<Breaker>& GetBreaker();
-        const shared_ptr<MakerAreas>& GetMaker();
+        const shared_ptr<Maker>& GetMaker();
+        const shared_ptr<QComboBox>& GetColorComboxBox();
+        const shared_ptr<QCheckBox>& GetDisplayPatternCheckBox();
 
         void Draw();
         void DrawColorCombo();
+        void DrawCheckbox();
 
     protected:
 
     private:
+        /// handle breaker
         shared_ptr<Breaker>      breaker_;
-        shared_ptr<MakerAreas>   maker_;
-        shared_ptr<QComboBox>    combobox_;
+
+        /// handle maker
+        shared_ptr<Maker>        maker_;
+
+        /// handle color combobox
+        shared_ptr<QComboBox>    color_combobox_;
+
+        /// handle display pattern checkbox
+        shared_ptr<QCheckBox>    display_pattern_checkbox_;
 };
 
 #endif // DECODINGBOARD_H
