@@ -57,7 +57,8 @@ class HoleMatrix: public CustomControls
                              const int        row_break_index           = comdef::decodingboard::kDefRowBreakIndex,
                              void (QAbstractButton::* event)(bool)      = nullptr,
                              const CustomControls* receiver             = nullptr,
-                             void (CustomControls::* handler)()         = nullptr);
+                             void (CustomControls::* handler)()         = nullptr,
+                             bool enable_status                         = false);
 
         void DisableCurrentRow();
         void EnableNewRow();

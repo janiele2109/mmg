@@ -49,7 +49,8 @@ Breaker::Breaker(uint8_t num_of_rows,
                                    comdef::breakerarea::kDefRowBreakIndex,
                                    &QPushButton::clicked,
                                    new CustomControls(),
-                                   &CustomControls::SetQPushButtonColor);
+                                   &CustomControls::SetQPushButtonColor,
+                                   false);
 
     holes_matrix_->EnableNewRow();
 }

@@ -119,7 +119,7 @@ const vector<vector<shared_ptr<QPushButton>>>& HoleMatrix::GetHoles(){ return ho
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///
-/// \fn         CustomControls::CreatePushButton
+/// \fn         CustomControls::InitHolesMatrix
 /// \brief      Create QT push button
 ///
 /// \param      rect
@@ -150,6 +150,10 @@ const vector<vector<shared_ptr<QPushButton>>>& HoleMatrix::GetHoles(){ return ho
 /// \brief      handler function for the triggered event
 /// \default    nullptr
 ///
+/// \param      enable_status
+/// \brief      enable status of push button
+/// \default    false
+///
 /// \return     void
 ///
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -160,7 +164,8 @@ void HoleMatrix::InitHolesMatrix(QRect            rect,
                                  const int        row_break_index,
                                  void (QAbstractButton::* event)(bool),
                                  const CustomControls* receiver,
-                                 void (CustomControls::* handler)())
+                                 void (CustomControls::* handler)(),
+                                 bool enable_status)
 {
     uint16_t org_top_left_x     =   rect.x();
     uint16_t padding            =   comdef::decodingboard::pushbutton::kLargePadding;
@@ -189,7 +194,7 @@ void HoleMatrix::InitHolesMatrix(QRect            rect,
                                                                            event,
                                                                            receiver,
                                                                            handler,
-                                                                           false);
+                                                                           enable_status);
 
             rect.moveTo(rect.x() + rect.width() + padding,
                         rect.y());

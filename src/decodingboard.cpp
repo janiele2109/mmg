@@ -129,7 +129,9 @@ void DecodingBoard::Draw()
 
     maker_->DrawKeyMatrix();
 
-    //maker_->DrawPatternMatrix();
+    maker_->DrawPatternMatrix();
+
+    maker_->HidePatternMatrix();
 
     DrawColorCombo();
 

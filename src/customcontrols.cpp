@@ -84,7 +84,7 @@ CustomControls::~CustomControls() {}
 ///
 /// \param      enable_status
 /// \brief      enable status of push button
-/// \default    nullptr
+/// \default    false
 ///
 /// \return     unique_ptr<QPushButton>
 /// \brief      newly created push button
@@ -110,11 +110,10 @@ unique_ptr<QPushButton> CustomControls::CreatePushButton(const QRect& rect,
 
     btn->move(rect.x(), rect.y());
 
+    btn->setEnabled(enable_status);
+
     if(event != nullptr)
         connect(btn.get(), event, receiver, handler);
-
-    if(!enable_status)
-        btn->setEnabled(false);
 
     return btn;
 }
@@ -291,5 +290,7 @@ void CustomControls::DisplayColorPattern(bool checked)
                             ->GetMaker();
 
     if(checked)
-        maker->DrawPatternMatrix();
+        maker->DisplayPatternMatrix();
+    else
+        maker->HidePatternMatrix();
 }

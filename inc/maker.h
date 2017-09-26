@@ -54,6 +54,7 @@ class Maker
         const shared_ptr<vector<comdef::AnalizedColorPattern>>& AnalyzeColorPattern();
 
         void DrawPatternMatrix();
+        void DisplayPatternMatrix();
         void HidePatternMatrix();
         void DrawKeyMatrix();
 
