@@ -259,11 +259,6 @@ void CustomControls::SetQPushButtonColor()
 
     if(holes_matrix->IsCurrentRowFilled())
         master_mind_game->CheckResult();
-    else
-    {
-        master_mind_game->GetDecodingBoard()->GetBreaker()->GetHolesMatrix()->DisableCurrentRow();
-        master_mind_game->GetDecodingBoard()->GetBreaker()->GetHolesMatrix()->EnableNewRow();
-    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
