@@ -44,13 +44,11 @@
 
 Maker::Maker(): pattern_matrix_{new HoleMatrix{comdef::makerarea::kDefNumOfRows,
                                                comdef::makerarea::kDefNumOfHolesPerRow}},
-                          analized_color_pattern_{new vector<comdef::AnalizedColorPattern>},
-                          key_matrix_{new HoleMatrix{comdef::breakerarea::kDefNumOfRows,
-                                                     comdef::breakerarea::kDefNumOfHolesPerRow}}
+                analized_color_pattern_{new vector<comdef::AnalizedColorPattern>},
+                key_matrix_{new HoleMatrix{comdef::breakerarea::kDefNumOfRows,
+                                           comdef::breakerarea::kDefNumOfHolesPerRow}}
 {
     InitPatternMatrix();
-
-    AnalyzeColorPattern();
 
     InitKeyMatrix();
 }
@@ -277,6 +275,8 @@ void Maker::DrawPatternMatrix()
 
         outter_layout->addLayout(row_layout.get());
     }
+
+    AnalyzeColorPattern();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -202,7 +202,7 @@ uint8_t MasterMindGame::CountColor(const vector<comdef::AnalizedCodeColor>& anal
     uint8_t cnt = 0;
 
     for(auto& item: analized_code_color)
-        if(item.code_color == color)
+        if(item.code_color.rgb() == color.rgb())
             cnt++;
 
     return cnt;
@@ -226,7 +226,7 @@ uint8_t MasterMindGame::CalculateScores()
 
     uint8_t cur_row_idx = decoding_board_->GetBreaker()->GetHolesMatrix()->GetLastEnabledRow();
 
-    shared_ptr<vector<comdef::AnalizedColorPattern>> analized_color_pattern = GetDecodingBoard()->GetMaker()->GetAnalizedColorPattern();
+    shared_ptr<vector<comdef::AnalizedColorPattern>> analized_color_pattern = decoding_board_->GetMaker()->GetAnalizedColorPattern();
 
     unique_ptr<vector<comdef::AnalizedCodeColor>> analized_code_color = AnalyzeCodeColor();
 
@@ -277,13 +277,17 @@ void MasterMindGame::CheckResult()
     uint8_t num_of_holes_per_row    = decoding_board_->GetBreaker()->GetHolesMatrix()->GetNumOfHolesPerRow();
     uint8_t last_enabled_row        = decoding_board_->GetBreaker()->GetHolesMatrix()->GetLastEnabledRow();
 
-    decoding_board_->GetMaker()->DrawPatternMatrix();
-
     if(score == num_of_holes_per_row)
+    {
+        decoding_board_->GetMaker()->DisplayPatternMatrix();
         QMessageBox::information(nullptr, comdef::info::kAppName, "Hurray! You win!");
+    }
     else if(score < num_of_holes_per_row &&
             last_enabled_row == comdef::breakerarea::kDefNumOfRows - 1)
+    {
         QMessageBox::information(nullptr, comdef::info::kAppName, "You lose!");
+        decoding_board_->GetMaker()->DisplayPatternMatrix();
+    }
     else
     {
         decoding_board_->GetBreaker()->GetHolesMatrix()->DisableCurrentRow();
